@@ -16,4 +16,14 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static final int DVT_GAMEPAD = 0;
+
+    public static final int DT_RIGHT_FALCON_LEADER = 0;
+    public static final int DT_RIGHT_FALCON_1 = 0;
+    public static final int DT_RIGHT_FALCON_2 = 0;
+
+    public static final int DT_LEFT_FALCON_LEADER = 0;
+    public static final int DT_LEFT_FALCON_1 = 0;
+    public static final int DT_LEFT_FALCON_2 = 0;
+
 }
