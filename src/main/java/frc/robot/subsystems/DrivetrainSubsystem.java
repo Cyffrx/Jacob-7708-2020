@@ -7,7 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -18,13 +19,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
    * Creates a new DrivetrainSub.
    */
 
-  private WPI_TalonSRX RFalcon_Leader = new WPI_TalonSRX(Constants.DT_RIGHT_FALCON_LEADER);
-  private WPI_TalonSRX RFalcon_1 = new WPI_TalonSRX(Constants.DT_RIGHT_FALCON_1);
-  private WPI_TalonSRX RFalcon_2 = new WPI_TalonSRX(Constants.DT_RIGHT_FALCON_2);
+  private WPI_TalonFX RFalcon_Leader = new WPI_TalonFX(Constants.DT_RIGHT_FALCON_LEADER);
+  private WPI_TalonFX RFalcon_1 = new WPI_TalonFX(Constants.DT_RIGHT_FALCON_1);
+  private WPI_TalonFX RFalcon_2 = new WPI_TalonFX(Constants.DT_RIGHT_FALCON_2);
   
-  private WPI_TalonSRX LFalcon_Leader = new WPI_TalonSRX(Constants.DT_LEFT_FALCON_LEADER);
-  private WPI_TalonSRX LFalcon_1 = new WPI_TalonSRX(Constants.DT_LEFT_FALCON_1);
-  private WPI_TalonSRX LFalcon_2 = new WPI_TalonSRX(Constants.DT_LEFT_FALCON_2);
+  private WPI_TalonFX LFalcon_Leader = new WPI_TalonFX(Constants.DT_LEFT_FALCON_LEADER);
+  private WPI_TalonFX LFalcon_1 = new WPI_TalonFX(Constants.DT_LEFT_FALCON_1);
+  private WPI_TalonFX LFalcon_2 = new WPI_TalonFX(Constants.DT_LEFT_FALCON_2);
   
   private DifferentialDrive drive_logic = new DifferentialDrive(LFalcon_Leader, RFalcon_Leader);
   //private double turn_limiter = .70;

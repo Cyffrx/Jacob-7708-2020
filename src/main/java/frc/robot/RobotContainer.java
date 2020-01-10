@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-//import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DrivetrainCommand;
@@ -45,7 +44,7 @@ public class RobotContainer {
       new DrivetrainCommand(
         m_drivetrain,
         () -> ControllerMaster.getY(GenericHID.Hand.kLeft),
-        () -> ControllerMaster.getY(GenericHID.Hand.kRight)
+        () -> ControllerMaster.getY(GenericHID.Hand.kRight) // $ - i still don't quite understand this lambda expression but tutorial had it so \_('-')_/
         )
     );
 

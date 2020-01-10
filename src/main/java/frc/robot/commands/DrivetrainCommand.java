@@ -27,7 +27,6 @@ public class DrivetrainCommand extends CommandBase {
       DoubleSupplier rotation
     ) {
     
-      // Use addRequirements() here to declare subsystem dependencies.
     m_forward = forward;
     m_rotation = rotation;
     m_drive = drivetrain;
