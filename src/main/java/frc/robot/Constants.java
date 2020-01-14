@@ -19,11 +19,11 @@ public final class Constants {
     public static final int DVT_GAMEPAD = 0;
 
     public static final int DT_RIGHT_FALCON_LEADER = 0;
-    public static final int DT_RIGHT_FALCON_1 = 0;
-    public static final int DT_RIGHT_FALCON_2 = 0;
+    public static final int DT_RIGHT_FALCON_1 = 1;
+    public static final int DT_RIGHT_FALCON_2 = 2;
 
-    public static final int DT_LEFT_FALCON_LEADER = 0;
-    public static final int DT_LEFT_FALCON_1 = 0;
-    public static final int DT_LEFT_FALCON_2 = 0;
+    public static final int DT_LEFT_FALCON_LEADER = 3;
+    public static final int DT_LEFT_FALCON_1 = 4;
+    public static final int DT_LEFT_FALCON_2 = 5;
 
 }

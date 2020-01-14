@@ -27,32 +27,37 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private WPI_TalonFX LFalcon_1 = new WPI_TalonFX(Constants.DT_LEFT_FALCON_1);
   private WPI_TalonFX LFalcon_2 = new WPI_TalonFX(Constants.DT_LEFT_FALCON_2);
   
-  private DifferentialDrive drive_logic = new DifferentialDrive(LFalcon_Leader, RFalcon_Leader);
-  //private double turn_limiter = .70;
+  private DifferentialDrive drivetrain = new DifferentialDrive(LFalcon_Leader, RFalcon_Leader);
+  
+  private static double debug_limiter = .1;
   
   public DrivetrainSubsystem() {
-    RFalcon_Leader.setInverted(false);
-    RFalcon_1.setInverted(true);
-    RFalcon_2.setInverted(true);
+    RFalcon_Leader.setInverted(true);
+
+    RFalcon_1.setInverted(false);
+    RFalcon_2.setInverted(false);
 
     RFalcon_1.follow(RFalcon_Leader);
     RFalcon_2.follow(RFalcon_Leader);
 
+/*
     LFalcon_Leader.setInverted(false);
     LFalcon_1.setInverted(true);
     LFalcon_2.setInverted(true);
-
+e
     LFalcon_1.follow(LFalcon_Leader);
     LFalcon_2.follow(LFalcon_Leader);
+  */  
   }
 
   public void cheezy_drive(double move, double turn) {
 
-    drive_logic.curvatureDrive(
-      move,
-      turn,
+    drivetrain.curvatureDrive(
+      move*debug_limiter,
+      turn*debug_limiter,
       true
     );
+
   }
 
 
