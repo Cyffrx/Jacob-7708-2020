@@ -40,14 +40,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
     RFalcon_1.follow(RFalcon_Leader);
     RFalcon_2.follow(RFalcon_Leader);
 
-/*
+
     LFalcon_Leader.setInverted(false);
     LFalcon_1.setInverted(true);
     LFalcon_2.setInverted(true);
-e
+
     LFalcon_1.follow(LFalcon_Leader);
     LFalcon_2.follow(LFalcon_Leader);
-  */  
+  
   }
 
   public void cheezy_drive(double move, double turn) {

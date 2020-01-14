@@ -25,6 +25,7 @@ public class RobotContainer {
 
   //  Subsystems
   private DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
+  // dummy thicc subsystem
 
   //  Comands
 
@@ -44,9 +45,18 @@ public class RobotContainer {
       new DrivetrainCommand(
         m_drivetrain,
         () -> ControllerMaster.getY(GenericHID.Hand.kLeft),
-        () -> ControllerMaster.getY(GenericHID.Hand.kRight) // $ - i still don't quite understand this lambda expression but tutorial had it so \_('-')_/
+        () -> ControllerMaster.getX(GenericHID.Hand.kRight) // $ - i still don't quite understand this lambda expression but tutorial had it so \_('-')_/
         )
     );
+
+    /*
+    dummythic.setdefaultcommand (
+      new deummyThicCmd (
+        launcher,
+        () -> ControllerMaster.getAButton();
+      )
+    )
+    */
 
     
   }
