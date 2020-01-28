@@ -22,8 +22,13 @@ public final class Constants {
     public static final int DT_RIGHT_FALCON_1 = 1;
     public static final int DT_RIGHT_FALCON_2 = 2;
 
-    public static final int DT_LEFT_FALCON_LEADER = 3;
-    public static final int DT_LEFT_FALCON_1 = 4;
-    public static final int DT_LEFT_FALCON_2 = 5;
+    public static final int DT_LEFT_FALCON_LEADER = 13;
+    public static final int DT_LEFT_FALCON_1 = 14;
+    public static final int DT_LEFT_FALCON_2 = 15;
 
+    public static final int SHOOTER_FALCON_MASTER = 12;
+    public static final int SHOOTER_FALCON_SLAVE = 3;
+ 
+    public static final int LIFT_FALCON = 4;
+    
 }

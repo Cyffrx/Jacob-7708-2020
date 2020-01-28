@@ -19,6 +19,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
    * Creates a new DrivetrainSub.
    */
 
+  private static double debug_limiter = 1;
+
   private WPI_TalonFX RFalcon_Leader = new WPI_TalonFX(Constants.DT_RIGHT_FALCON_LEADER);
   private WPI_TalonFX RFalcon_1 = new WPI_TalonFX(Constants.DT_RIGHT_FALCON_1);
   private WPI_TalonFX RFalcon_2 = new WPI_TalonFX(Constants.DT_RIGHT_FALCON_2);
@@ -29,7 +31,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
   
   private DifferentialDrive drivetrain = new DifferentialDrive(LFalcon_Leader, RFalcon_Leader);
   
-  private static double debug_limiter = .1;
   
   public DrivetrainSubsystem() {
     RFalcon_Leader.setInverted(true);
@@ -41,9 +42,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
     RFalcon_2.follow(RFalcon_Leader);
 
 
-    LFalcon_Leader.setInverted(false);
-    LFalcon_1.setInverted(true);
-    LFalcon_2.setInverted(true);
+    LFalcon_Leader.setInverted(true);
+    LFalcon_1.setInverted(false);
+    LFalcon_2.setInverted(false);
 
     LFalcon_1.follow(LFalcon_Leader);
     LFalcon_2.follow(LFalcon_Leader);

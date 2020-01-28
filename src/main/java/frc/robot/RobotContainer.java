@@ -11,7 +11,11 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DrivetrainCommand;
+import frc.robot.commands.LiftCommand;
+import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -24,11 +28,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   //  Subsystems
-  private DrivetrainSubsystem m_drivetrain = new DrivetrainSubsystem();
-  // dummy thicc subsystem
+  private DrivetrainSubsystem mDrivetrain = new DrivetrainSubsystem();
+  private ShooterSubsystem mShooter = new ShooterSubsystem();
+  private LiftSubsystem mLift = new LiftSubsystem();
 
-  //  Comands
-
+  //  Commands
 
   // Controller
   XboxController ControllerMaster = new XboxController(Constants.DVT_GAMEPAD);
@@ -41,24 +45,28 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     
-    m_drivetrain.setDefaultCommand(
+    mDrivetrain.setDefaultCommand(
       new DrivetrainCommand(
-        m_drivetrain,
+        mDrivetrain,
         () -> ControllerMaster.getY(GenericHID.Hand.kLeft),
         () -> ControllerMaster.getX(GenericHID.Hand.kRight) // $ - i still don't quite understand this lambda expression but tutorial had it so \_('-')_/
         )
     );
 
-    /*
-    dummythic.setdefaultcommand (
-      new deummyThicCmd (
-        launcher,
-        () -> ControllerMaster.getAButton();
-      )
-    )
-    */
 
-    
+    mShooter.setDefaultCommand(
+      new ShootCommand (
+        mShooter,
+        () -> ControllerMaster.getAButton()
+      )
+    );
+
+    mLift.setDefaultCommand(
+      new LiftCommand(mLift,
+      () -> ControllerMaster.getPOV()
+      )
+    );
+
   }
 
   /**
