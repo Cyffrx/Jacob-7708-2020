@@ -21,7 +21,7 @@ public class LiftSubsystem extends SubsystemBase {
   private static double LOWER_SPEED = .10;
   private static double BRAKE = 0;
 
-   private WPI_TalonFX LiftFalcon = new WPI_TalonFX(Constants.DT_LEFT_FALCON_LEADER);
+   private WPI_TalonFX LiftFalcon = new WPI_TalonFX(Constants.LIFT_FALCON);
 
    public LiftSubsystem() {
 
