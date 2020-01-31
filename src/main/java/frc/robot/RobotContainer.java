@@ -1,18 +1,13 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.ChassisCommand;
 import frc.robot.commands.DrivetrainCommand;
 import frc.robot.commands.LiftCommand;
 import frc.robot.commands.ShootCommand;
+import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -31,6 +26,7 @@ public class RobotContainer {
   private DrivetrainSubsystem mDrivetrain = new DrivetrainSubsystem();
   private ShooterSubsystem mShooter = new ShooterSubsystem();
   private LiftSubsystem mLift = new LiftSubsystem();
+  private ChassisSubsystem mChassis = new ChassisSubsystem();
 
   //  Commands
 
@@ -64,6 +60,14 @@ public class RobotContainer {
     mLift.setDefaultCommand(
       new LiftCommand(mLift,
       () -> ControllerMaster.getPOV()
+      )
+    );
+
+    mChassis.setDefaultCommand(
+      new ChassisCommand (
+        mChassis,
+        () -> ControllerMaster.getBButton(),
+        () -> ControllerMaster.getXButton()
       )
     );
 

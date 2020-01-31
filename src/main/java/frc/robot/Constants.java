@@ -29,6 +29,7 @@ public final class Constants {
     public static final int SHOOTER_FALCON_MASTER = 12;
     public static final int SHOOTER_FALCON_SLAVE = 3;
  
+    public static final int TALON_CHASSIS = -1;
     public static final int LIFT_FALCON = 4;
     
 }

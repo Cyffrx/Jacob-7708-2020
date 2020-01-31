@@ -17,7 +17,7 @@ public class LiftSubsystem extends SubsystemBase {
    * Creates a new LiftSubsystem.
    */
 
-  private static double RAISE_SPEED = 1.0;
+  private static double RAISE_SPEED = .10;
   private static double LOWER_SPEED = .10;
   private static double BRAKE = 0;
 
@@ -36,7 +36,8 @@ public class LiftSubsystem extends SubsystemBase {
    }
 
    public void brake() {
-    LiftFalcon.set(BRAKE);
+    LiftFalcon.set(BRAKE); // will likely need to be replaced with a PID subsystem to keep the robot's position on the bar
+                           // also might need to remove safety feature of FMS so it does not fall from its suspension.
    }
 
 
