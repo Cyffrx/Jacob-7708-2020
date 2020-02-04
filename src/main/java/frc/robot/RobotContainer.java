@@ -2,13 +2,17 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.Command;
+
 import frc.robot.commands.ChassisCommand;
 import frc.robot.commands.DrivetrainCommand;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.LiftCommand;
 import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -27,6 +31,7 @@ public class RobotContainer {
   private ShooterSubsystem mShooter = new ShooterSubsystem();
   private LiftSubsystem mLift = new LiftSubsystem();
   private ChassisSubsystem mChassis = new ChassisSubsystem();
+  private IntakeSubsystem mIntake = new IntakeSubsystem();
 
   //  Commands
 
@@ -69,6 +74,13 @@ public class RobotContainer {
         () -> ControllerMaster.getBButton(),
         () -> ControllerMaster.getXButton()
       )
+    );
+
+    mIntake.setDefaultCommand(
+      new IntakeCommand (
+        mIntake,
+        () -> ControllerMaster.getBumperReleased(Hand.kRight)
+    )
     );
 
   }

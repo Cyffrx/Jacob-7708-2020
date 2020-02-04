@@ -8,29 +8,26 @@
 package frc.robot.commands;
 
 import java.util.function.BooleanSupplier;
-import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
-
-public class LiftCommand extends CommandBase {
+public class IntakeCommand extends CommandBase {
   /**
-   * Creates a new LiftCommand.
+   * Creates a new IntakeSubystem.
    */
 
-  private final LiftSubsystem mLift;
-  private final IntSupplier mPOV;
-
-   public LiftCommand(LiftSubsystem Lift,
-        IntSupplier POV
-    ) {
+   private final IntakeSubsystem mIntake;
+   private final BooleanSupplier mToggleIntake;
+   
+  public IntakeCommand(IntakeSubsystem Intake,
+    BooleanSupplier ToggleIntake
+  ) {
     // Use addRequirements() here to declare subsystem dependencies.
-    mLift = Lift;
-    mPOV = POV;
+    mToggleIntake = ToggleIntake;
+    mIntake = Intake;
 
-    addRequirements(Lift);
-
+    addRequirements(Intake);
   }
 
   // Called when the command is initially scheduled.
@@ -41,11 +38,11 @@ public class LiftCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (mPOV.getAsInt() == 0) {
-      mLift.raiseRobot();
+    if (mToggleIntake.getAsBoolean()) {
+      mIntake.set_active();
     } else {
-      mLift.brake();
-    }
+      mIntake.set_inactive();
+    }  
   }
 
   // Called once the command ends or is interrupted.

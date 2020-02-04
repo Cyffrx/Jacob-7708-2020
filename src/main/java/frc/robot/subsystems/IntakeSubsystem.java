@@ -12,29 +12,27 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class LiftSubsystem extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
   /**
-   * Creates a new LiftSubsystem.
+   * Creates a new IntakeSubsystem.
    */
 
-  private static double RAISE_SPEED = .5;
-  private static double BRAKE = 0;
+   private WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.INTAKE);
 
-   private WPI_TalonFX LiftFalcon = new WPI_TalonFX(Constants.LIFT_FALCON);
+   private static final double SPEED = 1;
+   private static final double STOP = 1;
 
-   public LiftSubsystem() {
+  public IntakeSubsystem() {
 
   }
 
-  public void raiseRobot() {
-    LiftFalcon.set(RAISE_SPEED);
-   }
+  public void set_active() {
+    intakeMotor.set(SPEED);
+  }
 
-   public void brake() {
-    LiftFalcon.set(BRAKE); // will likely need to be replaced with a PID subsystem to keep the robot's position on the bar
-                           // also might need to remove safety feature of FMS so it does not fall from its suspension.
-   }
-
+  public void set_inactive() {
+    intakeMotor.set(STOP);
+  }
 
   @Override
   public void periodic() {
