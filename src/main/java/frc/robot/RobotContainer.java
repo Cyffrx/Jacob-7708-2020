@@ -2,7 +2,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.ChassisCommand;
@@ -79,7 +78,7 @@ public class RobotContainer {
     mIntake.setDefaultCommand(
       new IntakeCommand (
         mIntake,
-        () -> ControllerMaster.getBumperReleased(Hand.kRight)
+        () -> ControllerMaster.getBumperReleased(GenericHID.Hand.kLeft)
     )
     );
 
@@ -97,8 +96,8 @@ public class RobotContainer {
 
 
   /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
+   * Use this to pass the autonomous command to the main {@link Robot} class.622
+1   *
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
