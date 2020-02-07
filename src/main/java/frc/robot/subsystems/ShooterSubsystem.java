@@ -18,7 +18,6 @@ public class ShooterSubsystem extends SubsystemBase {
    */
 
    private static final double SHOOT_SPEED = 0.8;
-   private static final double HOLD_SPEED = .5;
    private static final double BRAKE = 0.0;
    private static final double LIMITER = 1;
 

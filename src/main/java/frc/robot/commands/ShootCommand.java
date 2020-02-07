@@ -11,7 +11,6 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShootCommand extends CommandBase {
