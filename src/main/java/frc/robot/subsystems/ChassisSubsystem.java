@@ -20,6 +20,7 @@ public class ChassisSubsystem extends SubsystemBase {
   private WPI_TalonSRX chassis_motor = new WPI_TalonSRX(Constants.TALON_CHASSIS);
   
   private final static double VERTICAL_ADJUST_SPEED = .5;
+  private final static double BRAKE = 0;
   
   public ChassisSubsystem() {
 
@@ -31,6 +32,11 @@ public class ChassisSubsystem extends SubsystemBase {
 
   public void lower_chassis() {
     chassis_motor.set(-VERTICAL_ADJUST_SPEED);
+  }
+
+  public void hold_chassis() {
+    // potentially replace with a PID loop to keep at current setting
+    chassis_motor.set(BRAKE);
   }
 
   @Override

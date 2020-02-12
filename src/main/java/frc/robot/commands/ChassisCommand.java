@@ -40,6 +40,15 @@ public class ChassisCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+    if (mRaiseChassis.getAsBoolean()) {
+      mChassis.raise_chassis();
+    } else if (mLowerChassis.getAsBoolean()) {
+      mChassis.lower_chassis();
+    } else {
+      mChassis.hold_chassis();
+    }
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.

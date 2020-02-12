@@ -7,6 +7,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -16,6 +20,7 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    
     public static final int DVT_GAMEPAD = 0;
 
     public static final int DT_RIGHT_FALCON_LEADER = 0;
@@ -32,5 +37,27 @@ public final class Constants {
     public static final int INTAKE = -1;
     public static final int TALON_CHASSIS = -1;
     public static final int LIFT_FALCON = 4;
+
+
+    /// VISION STUFF ///
+
+    public static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+
+    public static final NetworkTableEntry tx = table.getEntry("tx");
+    public static final NetworkTableEntry ty = table.getEntry("ty");
+    public static final NetworkTableEntry ta = table.getEntry("ta");
+    public static final NetworkTableEntry tv = table.getEntry("tv");
+
+    public static final NetworkTableEntry LED_MODE = table.getEntry("ledMode");
+    public static final NetworkTableEntry CAM_MODE = table.getEntry("camMode");
+    public static final NetworkTableEntry PIPELINE = table.getEntry("pipeline");
     
+    public static final double cameraHeightInches = 0; // 15 inches
+
+    public static final double cameraMountingAngle = 0; // 17.2 degrees
+
+    public static final double visionTargetHeightLow = 0; // X feet, Y inches
+    public static final double visionTargetHeightHigh = 0; // X feet, Y inches
+
+
 }
