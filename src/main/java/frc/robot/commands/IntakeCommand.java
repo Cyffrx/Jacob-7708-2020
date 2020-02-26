@@ -19,13 +19,16 @@ public class IntakeCommand extends CommandBase {
 
    private final IntakeSubsystem mIntake;
    private final BooleanSupplier mToggleIntake;
+   private final BooleanSupplier mSlide;
    
   public IntakeCommand(IntakeSubsystem Intake,
-    BooleanSupplier ToggleIntake
+    BooleanSupplier ToggleIntake,
+    BooleanSupplier Slide
   ) {
     // Use addRequirements() here to declare subsystem dependencies.
     mToggleIntake = ToggleIntake;
     mIntake = Intake;
+    mSlide = Slide;
 
     addRequirements(Intake);
   }
@@ -38,6 +41,12 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    // NEEDS TO HAPPEN ONLY IF THE LOW SWITCH IS ACTIVATED
+    if (mSlide.getAsBoolean()) {
+      mIntake.slide();
+    }
+
     if (mToggleIntake.getAsBoolean()) {
       mIntake.set_active();
     } else {

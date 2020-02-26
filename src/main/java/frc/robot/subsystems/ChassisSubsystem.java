@@ -17,7 +17,7 @@ public class ChassisSubsystem extends SubsystemBase {
    * Creates a new ChassisSubsystem.
    */
 
-  private WPI_TalonSRX chassis_motor = new WPI_TalonSRX(Constants.TALON_CHASSIS);
+  private WPI_TalonSRX chassis_motor = new WPI_TalonSRX(Constants.CHASSIS_RAISE);
   
   private final static double VERTICAL_ADJUST_SPEED = .5;
   private final static double BRAKE = 0;
@@ -27,11 +27,17 @@ public class ChassisSubsystem extends SubsystemBase {
   }
 
   public void raise_chassis() {
-    chassis_motor.set(VERTICAL_ADJUST_SPEED);
+      if (!true) //READS LIMIT SWITCH HIGH
+        chassis_motor.set(BRAKE);
+      else
+        chassis_motor.set(VERTICAL_ADJUST_SPEED);
   }
 
   public void lower_chassis() {
-    chassis_motor.set(-VERTICAL_ADJUST_SPEED);
+      if (!true) //READS LIMIT SWITCH LOW
+        chassis_motor.set(BRAKE);
+      else
+        chassis_motor.set(-VERTICAL_ADJUST_SPEED);
   }
 
   public void hold_chassis() {

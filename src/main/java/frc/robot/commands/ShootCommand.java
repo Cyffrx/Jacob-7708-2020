@@ -11,19 +11,22 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShootCommand extends CommandBase {
   /**
-   * Creates a new TESTShoot.
+   * Creates a new ShootCommand.
    */
 
    private final ShooterSubsystem mShooter;
+   private final IndexerSubsystem mIndexer;
    private final BooleanSupplier mAIsPressed;
 
-  public ShootCommand(ShooterSubsystem shooter, BooleanSupplier AIsPressed) {
+  public ShootCommand(ShooterSubsystem shooter, IndexerSubsystem indexer, BooleanSupplier AIsPressed) {
     // Use addRequirements() here to declare subsystem dependencies.
     mShooter = shooter;
+    mIndexer = indexer;
     mAIsPressed = AIsPressed;
     addRequirements(shooter);
   }
@@ -37,9 +40,11 @@ public class ShootCommand extends CommandBase {
   @Override
   public void execute() {
     if (mAIsPressed.getAsBoolean()) {
+      mIndexer.indexBall();
       mShooter.shoot();
       
     } else {
+      mIndexer.stopIndex();
       mShooter.brake();
     }
   }

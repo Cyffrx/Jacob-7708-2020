@@ -11,6 +11,7 @@ import frc.robot.commands.ShootCommand;
 import frc.robot.sensors.vision_processing.LimelightSubsystem;
 import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -30,7 +31,9 @@ public class RobotContainer {
   private ShooterSubsystem mShooter = new ShooterSubsystem();
   private LiftSubsystem mLift = new LiftSubsystem();
   private ChassisSubsystem mChassis = new ChassisSubsystem();
+  private IndexerSubsystem mIndexer = new IndexerSubsystem();
   private IntakeSubsystem mIntake = new IntakeSubsystem();
+  
   private LimelightSubsystem mLimelight = new LimelightSubsystem();
 
   //  Commands
@@ -50,17 +53,11 @@ public class RobotContainer {
       new DrivetrainCommand(
         mDrivetrain,
         () -> ControllerMaster.getY(GenericHID.Hand.kLeft),
-        () -> ControllerMaster.getX(GenericHID.Hand.kRight) // $ - i still don't quite understand this lambda expression but tutorial had it so \_('-')_/
+        () -> ControllerMaster.getX(GenericHID.Hand.kRight), // $ - i still don't quite understand this lambda expression but tutorial had it so \_('-')_/
+        () -> ControllerMaster.getAButtonReleased()
         )
     );
 
-
-    mShooter.setDefaultCommand(
-      new ShootCommand (
-        mShooter,
-        () -> ControllerMaster.getAButton()
-      )
-    );
 
     mLift.setDefaultCommand(
       new LiftCommand(mLift,
@@ -79,8 +76,17 @@ public class RobotContainer {
     mIntake.setDefaultCommand(
       new IntakeCommand (
         mIntake,
-        () -> ControllerMaster.getBumperReleased(GenericHID.Hand.kLeft)
+        () -> ControllerMaster.getBumper(GenericHID.Hand.kLeft),
+        () -> ControllerMaster.getXButtonReleased()
     )
+    );
+
+    mShooter.setDefaultCommand(
+      new ShootCommand (
+        mShooter,
+        mIndexer,
+        () -> ControllerMaster.getBumper(GenericHID.Hand.kRight)
+      )
     );
 
   }

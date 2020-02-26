@@ -35,9 +35,22 @@ public final class Constants {
     public static final int SHOOTER_FALCON_SLAVE = 3;
  
     public static final int INTAKE = -1;
-    public static final int TALON_CHASSIS = -1;
-    public static final int LIFT_FALCON = 4;
+    public static final int INDEXER = -1;
+    public static final int CHASSIS_RAISE = -1;
+    public static final int LIFT = -1;
 
+
+    /// PNEUMATICS ///
+
+    public static final int R_GEARBOX_SHIFT_FWD = -1;
+    public static final int R_GEARBOX_SHIFT_BKWD = -1;
+    public static final int L_GEARBOX_SHIFT_FWD = -1;
+    public static final int L_GEARBOX_SHIFT_BKWD = -1;
+
+    public static final int R_SLIDERAIL_FWD = -1;
+    public static final int R_SLIDERAIL_BKWD = -1;
+    public static final int L_SLIDERAIL_FWD = -1;
+    public static final int L_SLIDERAIL_BKWD = -1;
 
     /// VISION STUFF ///
 

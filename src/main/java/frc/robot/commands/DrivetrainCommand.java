@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -14,23 +15,26 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class DrivetrainCommand extends CommandBase {
 
-  private final DrivetrainSubsystem m_drive;
-  private final DoubleSupplier m_forward;
-  private final DoubleSupplier m_rotation;
-
+  private final DrivetrainSubsystem mDrive;
+  private final DoubleSupplier mForward;
+  private final DoubleSupplier mRotation;
+  private final BooleanSupplier mGearshift;
+  
   /**
    * Creates a new DrivetrainCommand.
    */
   public DrivetrainCommand(
       DrivetrainSubsystem drivetrain, 
       DoubleSupplier forward, 
-      DoubleSupplier rotation
+      DoubleSupplier rotation,
+      BooleanSupplier gearShift
     ) {
     
-    m_forward = forward;
-    m_rotation = rotation;
-    m_drive = drivetrain;
-    addRequirements(m_drive);
+    mGearshift = gearShift;
+    mForward = forward;
+    mRotation = rotation;
+    mDrive = drivetrain;
+    addRequirements(mDrive);
   }
 
   // Called when the command is initially scheduled.
@@ -42,7 +46,10 @@ public class DrivetrainCommand extends CommandBase {
   @Override
   public void execute() {  
 
-    m_drive.cheezy_drive(m_forward.getAsDouble(), m_rotation.getAsDouble());
+    if (mGearshift.getAsBoolean())
+      mDrive.shift();
+     
+    mDrive.cheezy_drive(mForward.getAsDouble(), mRotation.getAsDouble());
 
   }
 
