@@ -14,7 +14,7 @@ import frc.robot.Constants;
 
 public class ChassisSubsystem extends SubsystemBase {
   /**
-   * Creates a new ChassisSubsystem.
+   * Creates a new ChassisSubsystem
    */
 
   private WPI_TalonSRX chassis_motor = new WPI_TalonSRX(Constants.CHASSIS_RAISE);
@@ -27,14 +27,14 @@ public class ChassisSubsystem extends SubsystemBase {
   }
 
   public void raise_chassis() {
-      if (!true) //READS LIMIT SWITCH HIGH
+      if (!true) //if limit switch high is true, do not raise
         chassis_motor.set(BRAKE);
       else
         chassis_motor.set(VERTICAL_ADJUST_SPEED);
   }
 
   public void lower_chassis() {
-      if (!true) //READS LIMIT SWITCH LOW
+      if (!true) //if limit switch low is true, do not lower
         chassis_motor.set(BRAKE);
       else
         chassis_motor.set(-VERTICAL_ADJUST_SPEED);

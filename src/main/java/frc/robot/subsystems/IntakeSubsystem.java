@@ -21,25 +21,23 @@ public class IntakeSubsystem extends SubsystemBase {
 
    private WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.INTAKE);
 
-   DoubleSolenoid RSlider = new DoubleSolenoid(Constants.R_SLIDERAIL_FWD, Constants.R_SLIDERAIL_BKWD);
-   DoubleSolenoid LSlider = new DoubleSolenoid(Constants.L_SLIDERAIL_FWD, Constants.L_SLIDERAIL_BKWD);
+   DoubleSolenoid sliderail = new DoubleSolenoid(Constants.SLIDERAIL_FWD, Constants.SLIDERAIL_BKWD);
  
    private static final double SPEED = .2;
    private static final double STOP = 0;
 
   public IntakeSubsystem() {
 
-    RSlider.set(Value.kForward);
-    LSlider.set(Value.kForward);
+    sliderail.set(Value.kForward);
   }
 
   public void slide() {
-    if (RSlider.get() == Value.kForward) {
-      RSlider.set(Value.kReverse);
-      LSlider.set(Value.kReverse);  
+    if (sliderail.get() == Value.kForward) {
+      //needs to check if low limit switch is activated
+      sliderail.set(Value.kReverse);
     } else {
-      RSlider.set(Value.kForward);
-      LSlider.set(Value.kForward);  
+      //needs to check if low limit switch is activated
+      sliderail.set(Value.kForward);
     }
   }
   

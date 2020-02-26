@@ -42,15 +42,11 @@ public final class Constants {
 
     /// PNEUMATICS ///
 
-    public static final int R_GEARBOX_SHIFT_FWD = -1;
-    public static final int R_GEARBOX_SHIFT_BKWD = -1;
-    public static final int L_GEARBOX_SHIFT_FWD = -1;
-    public static final int L_GEARBOX_SHIFT_BKWD = -1;
+    public static final int GEARSHIFT_FWD = -1;
+    public static final int GEARSHIFT_BKWD = -1;
 
-    public static final int R_SLIDERAIL_FWD = -1;
-    public static final int R_SLIDERAIL_BKWD = -1;
-    public static final int L_SLIDERAIL_FWD = -1;
-    public static final int L_SLIDERAIL_BKWD = -1;
+    public static final int SLIDERAIL_FWD= -1;
+    public static final int SLIDERAIL_BKWD= -1;
 
     /// VISION STUFF ///
 
