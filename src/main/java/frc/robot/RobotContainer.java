@@ -40,6 +40,7 @@ public class RobotContainer {
 
   // Controller
   XboxController ControllerMaster = new XboxController(Constants.DVT_GAMEPAD);
+  XboxController ControllerShooter = new XboxController(Constants.SHT_GAMEPAD);
 
 
   /**
@@ -52,40 +53,43 @@ public class RobotContainer {
     mDrivetrain.setDefaultCommand(
       new DrivetrainCommand(
         mDrivetrain,
-        () -> ControllerMaster.getY(GenericHID.Hand.kLeft),
-        () -> ControllerMaster.getX(GenericHID.Hand.kRight), // $ - i still don't quite understand this lambda expression but tutorial had it so \_('-')_/
-        () -> ControllerMaster.getAButtonReleased()
+        () -> ControllerMaster.getY(GenericHID.Hand.kLeft), // power
+        () -> ControllerMaster.getX(GenericHID.Hand.kRight), // rotation
+        () -> ControllerMaster.getAButtonReleased() // gearshift
         )
     );
 
 
     mLift.setDefaultCommand(
       new LiftCommand(mLift,
-      () -> ControllerMaster.getPOV()
+      () -> ControllerMaster.getPOV() // lift dpad
       )
     );
 
     mChassis.setDefaultCommand(
       new ChassisCommand (
         mChassis,
-        () -> ControllerMaster.getBButton(),
-        () -> ControllerMaster.getXButton()
+        () -> ControllerMaster.getBButton(), // move chassis up
+        () -> ControllerMaster.getXButton() // move chassis down
       )
     );
 
     mIntake.setDefaultCommand(
       new IntakeCommand (
         mIntake,
-        () -> ControllerMaster.getBumper(GenericHID.Hand.kLeft),
-        () -> ControllerMaster.getXButtonReleased()
+        () -> ControllerMaster.getBumper(GenericHID.Hand.kLeft), // toggle intake
+        () -> ControllerMaster.getXButtonReleased() // slide toggle
     )
     );
+
 
     mShooter.setDefaultCommand(
       new ShootCommand (
         mShooter,
         mIndexer,
-        () -> ControllerMaster.getBumper(GenericHID.Hand.kRight)
+        () -> ControllerShooter.getBumper(GenericHID.Hand.kRight), // shoot
+        () -> ControllerShooter.getBumper(GenericHID.Hand.kRight) // shoot
+        
       )
     );
 

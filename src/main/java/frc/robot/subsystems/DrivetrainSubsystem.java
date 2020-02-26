@@ -31,7 +31,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   private WPI_TalonFX LFalcon_1 = new WPI_TalonFX(Constants.DT_LEFT_FALCON_1);
   private WPI_TalonFX LFalcon_2 = new WPI_TalonFX(Constants.DT_LEFT_FALCON_2);
 
-  DoubleSolenoid gearshift = new DoubleSolenoid(Constants.GEARSHIFT_FWD, Constants.GEARSHIFT_BKWD);
+  private DoubleSolenoid gearshift = new DoubleSolenoid(Constants.GEARSHIFT_FWD, Constants.GEARSHIFT_BKWD);
   
   
   private DifferentialDrive drivetrain = new DifferentialDrive(LFalcon_Leader, RFalcon_Leader);

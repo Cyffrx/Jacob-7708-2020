@@ -21,14 +21,22 @@ public class ShootCommand extends CommandBase {
 
    private final ShooterSubsystem mShooter;
    private final IndexerSubsystem mIndexer;
-   private final BooleanSupplier mAIsPressed;
+   private final BooleanSupplier mShoot;
+   private final BooleanSupplier mIndex;
 
-  public ShootCommand(ShooterSubsystem shooter, IndexerSubsystem indexer, BooleanSupplier AIsPressed) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public ShootCommand(ShooterSubsystem shooter, 
+    IndexerSubsystem indexer, 
+    BooleanSupplier shoot, 
+    BooleanSupplier index) {
+    
     mShooter = shooter;
     mIndexer = indexer;
-    mAIsPressed = AIsPressed;
+    
+    mShoot = shoot;
+    mIndex = index;
+
     addRequirements(shooter);
+    addRequirements(indexer);
   }
 
   // Called when the command is initially scheduled.
@@ -39,7 +47,7 @@ public class ShootCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (mAIsPressed.getAsBoolean()) {
+    if (mShoot.getAsBoolean()) {
       mIndexer.indexBall();
       mShooter.shoot();
       

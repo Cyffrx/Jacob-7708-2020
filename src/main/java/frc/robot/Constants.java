@@ -22,6 +22,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 public final class Constants {
     
     public static final int DVT_GAMEPAD = 0;
+    public static final int SHT_GAMEPAD = 1;
 
     public static final int DT_RIGHT_FALCON_LEADER = 0;
     public static final int DT_RIGHT_FALCON_1 = 1;
