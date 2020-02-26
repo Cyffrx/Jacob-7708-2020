@@ -41,6 +41,25 @@ public final class Constants {
     public static final int LIFT = -1;
 
 
+    /// SPEEDS ///
+
+    public static final double INTAKE_SPEED = .8;
+    public static final double INTAKE_INDEX_SPEED = .25;
+    public static final double INDEX_SPEED = .8;
+    public static final double FLYWHEEL_SPEED = .8;
+    public static final double FLYWHEEL_COAST_SPEED = FLYWHEEL_SPEED / 2;
+
+
+
+    /// LIMITERS ///
+
+    public static final double DRIVETRAIN_LIMIT = .5;
+    public static final double FLYWHEEL_LIMIT = .5;
+    public static final double INDEXER_LIMIT = .5;
+    public static final double INTAKE_LIMIT = .5;
+    public static final double CHASSIS_VERTICAL_ADJUST_LIMIT = .5;
+    
+
     /// PNEUMATICS ///
 
     public static final int GEARSHIFT_FWD = -1;
@@ -48,6 +67,12 @@ public final class Constants {
 
     public static final int SLIDERAIL_FWD= -1;
     public static final int SLIDERAIL_BKWD= -1;
+
+    /// DIGITIAL INPUT ///
+
+    public static final int LIFT_HIGH = -1;
+    public static final int LIFT_LOW = -1;
+    
 
     /// VISION STUFF ///
 

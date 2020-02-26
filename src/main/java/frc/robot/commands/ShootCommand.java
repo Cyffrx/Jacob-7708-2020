@@ -11,7 +11,6 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShootCommand extends CommandBase {
@@ -20,23 +19,19 @@ public class ShootCommand extends CommandBase {
    */
 
    private final ShooterSubsystem mShooter;
-   private final IndexerSubsystem mIndexer;
+   private final BooleanSupplier mRamp;
    private final BooleanSupplier mShoot;
-   private final BooleanSupplier mIndex;
-
+   
   public ShootCommand(ShooterSubsystem shooter, 
-    IndexerSubsystem indexer, 
-    BooleanSupplier shoot, 
-    BooleanSupplier index) {
+    BooleanSupplier ramp,
+    BooleanSupplier shoot
+    ) {
     
     mShooter = shooter;
-    mIndexer = indexer;
-    
+    mRamp = ramp;
     mShoot = shoot;
-    mIndex = index;
-
+    
     addRequirements(shooter);
-    addRequirements(indexer);
   }
 
   // Called when the command is initially scheduled.
@@ -47,14 +42,16 @@ public class ShootCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (mShoot.getAsBoolean()) {
-      mIndexer.indexBall();
-      mShooter.shoot();
-      
+    if (mRamp.getAsBoolean()) {
+      mShooter.ramp();
     } else {
-      mIndexer.stopIndex();
-      mShooter.brake();
+      mShooter.coast();
     }
+
+    if (mShoot.getAsBoolean()) {
+      mShooter.shoot();
+    }
+  
   }
 
   // Called once the command ends or is interrupted.

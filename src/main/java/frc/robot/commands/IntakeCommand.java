@@ -18,16 +18,29 @@ public class IntakeCommand extends CommandBase {
    */
 
    private final IntakeSubsystem mIntake;
-   private final BooleanSupplier mToggleIntake;
+   private final BooleanSupplier mIsIntaking;
+   private final BooleanSupplier mIsIndexing;
    private final BooleanSupplier mSlide;
+
+   private boolean indexing = false;
+
+   /*
+   hold to intake
+   toggle to index into indexer and power shooter
+   hold to shoot
+   */
+   
    
   public IntakeCommand(IntakeSubsystem Intake,
-    BooleanSupplier ToggleIntake,
+    BooleanSupplier isIntaking,
+    BooleanSupplier isIndexing,
     BooleanSupplier Slide
   ) {
     // Use addRequirements() here to declare subsystem dependencies.
-    mToggleIntake = ToggleIntake;
+    
     mIntake = Intake;
+    mIsIntaking = isIntaking;
+    mIsIndexing = isIndexing;
     mSlide = Slide;
 
     addRequirements(Intake);
@@ -42,16 +55,25 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
 
-    // NEEDS TO HAPPEN ONLY IF THE LOW SWITCH IS ACTIVATED
-    if (mSlide.getAsBoolean()) {
-      mIntake.slide();
+    if (mIsIndexing.getAsBoolean()) {
+      indexing=!indexing;
     }
 
-    if (mToggleIntake.getAsBoolean()) {
-      mIntake.set_active();
+    if (indexing) {
+      mIntake.index();
     } else {
-      mIntake.set_inactive();
-    }  
+      mIntake.setInactive();
+    }
+    
+    if (mIsIntaking.getAsBoolean()) {
+      mIntake.intake();
+    }
+
+    // NEEDS TO HAPPEN ONLY IF THE LOW SWITCH IS ACTIVATED
+    if (mSlide.getAsBoolean() && !mIntake.isLow()) {
+      mIntake.sliderail_toggle();
+    }
+  
   }
 
   // Called once the command ends or is interrupted.

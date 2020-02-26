@@ -21,8 +21,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
    * Creates a new DrivetrainSub.
    */
 
-  private static double debug_limiter = 1;
-
   private WPI_TalonFX RFalcon_Leader = new WPI_TalonFX(Constants.DT_RIGHT_FALCON_LEADER);
   private WPI_TalonFX RFalcon_1 = new WPI_TalonFX(Constants.DT_RIGHT_FALCON_1);
   private WPI_TalonFX RFalcon_2 = new WPI_TalonFX(Constants.DT_RIGHT_FALCON_2);
@@ -33,12 +31,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   private DoubleSolenoid gearshift = new DoubleSolenoid(Constants.GEARSHIFT_FWD, Constants.GEARSHIFT_BKWD);
   
-  
   private DifferentialDrive drivetrain = new DifferentialDrive(LFalcon_Leader, RFalcon_Leader);
   
   
   public DrivetrainSubsystem() {
-    gearshift.set(Value.kForward);
+    gearshift.set(Value.kReverse);
 
     RFalcon_Leader.setInverted(true);
 
@@ -69,8 +66,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
   public void cheezy_drive(double move, double turn) {
 
     drivetrain.curvatureDrive(
-      move*debug_limiter,
-      turn*debug_limiter,
+      move*Constants.DRIVETRAIN_LIMIT,
+      turn*Constants.DRIVETRAIN_LIMIT,
       true
     );
 

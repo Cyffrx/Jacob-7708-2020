@@ -11,7 +11,6 @@ import frc.robot.commands.ShootCommand;
 import frc.robot.sensors.vision_processing.LimelightSubsystem;
 import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -31,12 +30,11 @@ public class RobotContainer {
   private ShooterSubsystem mShooter = new ShooterSubsystem();
   private LiftSubsystem mLift = new LiftSubsystem();
   private ChassisSubsystem mChassis = new ChassisSubsystem();
-  private IndexerSubsystem mIndexer = new IndexerSubsystem();
   private IntakeSubsystem mIntake = new IntakeSubsystem();
   
   private LimelightSubsystem mLimelight = new LimelightSubsystem();
 
-  //  Commands
+  // Commands
 
   // Controller
   XboxController ControllerMaster = new XboxController(Constants.DVT_GAMEPAD);
@@ -66,18 +64,19 @@ public class RobotContainer {
       )
     );
 
+
     mChassis.setDefaultCommand(
       new ChassisCommand (
         mChassis,
-        () -> ControllerMaster.getBButton(), // move chassis up
-        () -> ControllerMaster.getXButton() // move chassis down
+        () -> ControllerShooter.getY(GenericHID.Hand.kLeft) // move chassis
       )
     );
 
     mIntake.setDefaultCommand(
       new IntakeCommand (
         mIntake,
-        () -> ControllerMaster.getBumper(GenericHID.Hand.kLeft), // toggle intake
+        () -> ControllerShooter.getAButtonPressed(), // hold intake
+        () -> ControllerShooter.getBButtonReleased(), // toggle index
         () -> ControllerMaster.getXButtonReleased() // slide toggle
     )
     );
@@ -86,10 +85,8 @@ public class RobotContainer {
     mShooter.setDefaultCommand(
       new ShootCommand (
         mShooter,
-        mIndexer,
-        () -> ControllerShooter.getBumper(GenericHID.Hand.kRight), // shoot
-        () -> ControllerShooter.getBumper(GenericHID.Hand.kRight) // shoot
-        
+        () -> ControllerShooter.getBButtonReleased(), // ramp flywheel
+        () -> ControllerShooter.getBumperPressed(GenericHID.Hand.kRight) // activates indexer, shooting ball
       )
     );
 

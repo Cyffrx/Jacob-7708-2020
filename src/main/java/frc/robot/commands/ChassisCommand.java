@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ChassisSubsystem;
@@ -18,18 +19,16 @@ public class ChassisCommand extends CommandBase {
    */
 
    private final ChassisSubsystem mChassis;
-   private final BooleanSupplier mRaiseChassis;
-   private final BooleanSupplier mLowerChassis;
+   private final DoubleSupplier mChangeChassis;
 
 
 
    public ChassisCommand(ChassisSubsystem Chassis, 
-      BooleanSupplier RaiseChassis, 
-      BooleanSupplier LowerChassis
+      DoubleSupplier ChangeChassis
+      
   ) {
     // Use addRequirements() here to declare subsystem dependencies.
-    mRaiseChassis = RaiseChassis;
-    mLowerChassis = LowerChassis;
+    mChangeChassis = ChangeChassis;
 
     mChassis = Chassis;
 
@@ -41,20 +40,12 @@ public class ChassisCommand extends CommandBase {
   @Override
   public void initialize() {
 
-    if (mRaiseChassis.getAsBoolean()) {
-      mChassis.raise_chassis();
-    } else if (mLowerChassis.getAsBoolean()) {
-      mChassis.lower_chassis();
-    } else {
-      mChassis.hold_chassis();
-    }
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    mChassis.delta_chassis(mChangeChassis.getAsDouble());
     
   }
 

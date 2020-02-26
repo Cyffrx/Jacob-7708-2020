@@ -24,6 +24,9 @@ public class ShooterSubsystem extends SubsystemBase {
   private WPI_TalonFX RFalcon_Master = new WPI_TalonFX(Constants.SHOOTER_FALCON_MASTER);
   private WPI_TalonFX RFalcon_Slave = new WPI_TalonFX(Constants.SHOOTER_FALCON_SLAVE);
 
+  private WPI_TalonFX indexer = new WPI_TalonFX(Constants.INDEXER);
+
+
   public ShooterSubsystem() {
     RFalcon_Master.setInverted(false);
     RFalcon_Slave.setInverted(true);
@@ -33,11 +36,15 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shoot() {
-    RFalcon_Master.set(SHOOT_SPEED);
+    indexer.set(Constants.INDEX_SPEED*Constants.INDEXER_LIMIT);
+  }
+
+  public void ramp() {
+    RFalcon_Master.set(Constants.FLYWHEEL_SPEED*Constants.FLYWHEEL_LIMIT);
   }
 
   public void coast() {
-    RFalcon_Master.set(COAST);
+    RFalcon_Master.set(Constants.FLYWHEEL_COAST_SPEED*Constants.FLYWHEEL_LIMIT);
   }
 
   public void brake() {

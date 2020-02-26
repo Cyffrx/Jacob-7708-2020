@@ -49,7 +49,10 @@ public class DrivetrainCommand extends CommandBase {
     if (mGearshift.getAsBoolean())
       mDrive.shift();
      
-    mDrive.cheezy_drive(mForward.getAsDouble(), mRotation.getAsDouble());
+    mDrive.cheezy_drive(
+      mForward.getAsDouble(),
+      mRotation.getAsDouble()
+    );
 
   }
 
