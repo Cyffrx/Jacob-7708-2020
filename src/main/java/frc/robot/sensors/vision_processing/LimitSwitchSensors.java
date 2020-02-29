@@ -5,34 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.sensors.vision_processing;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ColorSensor extends SubsystemBase {
+public class LimitSwitchSensors extends SubsystemBase {
   /**
-   * Creates a new ColorSensor.
+   * Creates a new LimitSwitchSensors.
    */
-  
-   private TalonFX colorWheel = new TalonFX(Constants.COLOR_WHEEL);
-   
-   private DoubleSolenoid colorWheelSolenoid = new DoubleSolenoid(Constants.COLOR_WHEEL_FWD, Constants.COLOR_WHEEL_BKWD);
 
-   private ColorSensor colorSensor = new ColorSensor();
+  private DigitalInput limitSwitchHigh = new DigitalInput(Constants.LIMIT_SWITCH_HIGH);
+  private DigitalInput limitSwitchLow = new DigitalInput(Constants.LIMIT_SWITCH_LOW);
 
-   public ColorSensor() {
-  }
-
-  public void spinColorWheel() {
-    //code
-    
+  public LimitSwitchSensors() {
 
   }
 
+  public boolean isHigh() {
+    return limitSwitchHigh.get();
+  }
+
+  public boolean isLow() {
+    return limitSwitchLow.get();
+  }
 
   @Override
   public void periodic() {

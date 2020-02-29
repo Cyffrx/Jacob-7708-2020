@@ -9,11 +9,11 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.sensors.vision_processing.LimitSwitchSensors;
 
 public class IntakeSubsystem extends SubsystemBase {
   /**
@@ -25,20 +25,19 @@ public class IntakeSubsystem extends SubsystemBase {
 
    private WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.INTAKE);
 
-   DoubleSolenoid sliderail = new DoubleSolenoid(Constants.SLIDERAIL_FWD, Constants.SLIDERAIL_BKWD);
- 
+   private DoubleSolenoid sliderail = new DoubleSolenoid(Constants.SLIDERAIL_FWD, Constants.SLIDERAIL_BKWD);
+
+   public LimitSwitchSensors limitSwitches = new LimitSwitchSensors();
+
+
 
   public IntakeSubsystem() {
     sliderail.set(Value.kReverse);
   }
-
-  public boolean isLow() {
-    //return limitSwitchLow.get();
-    return true;
-  }
+  
 
   public void sliderail_toggle() {
-    if (sliderail.get() == Value.kReverse && !isLow()) {
+    if (sliderail.get() == Value.kReverse && !limitSwitches.isLow()) {
       //needs to check if low limit switch is activated
       sliderail.set(Value.kForward);
     } else {

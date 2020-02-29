@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.sensors.vision_processing.LimitSwitchSensors;
 
 public class ChassisSubsystem extends SubsystemBase {
   /**
@@ -20,8 +21,7 @@ public class ChassisSubsystem extends SubsystemBase {
 
   private WPI_TalonSRX chassis_motor = new WPI_TalonSRX(Constants.CHASSIS_RAISE);
   
-  private DigitalInput limitSwitchHigh = new DigitalInput(Constants.LIFT_HIGH);
-  private DigitalInput limitSwitchLow = new DigitalInput(Constants.LIFT_LOW);
+  private LimitSwitchSensors limitSwitches = new LimitSwitchSensors();
 
   private final static double BRAKE = 0;
   
@@ -29,25 +29,15 @@ public class ChassisSubsystem extends SubsystemBase {
 
   }
 
-  public boolean isHigh() {
-    //return limitSwitchHigh.get();
-    return true;
-  }
-
-  public boolean isLow() {
-    //return limitSwitchLow.get();
-    return true;
-  }
-
   public void delta_chassis(double speed) {
     if (speed > 0) { // if limit is false and speed is over 0
-      if (!isHigh())
+      if (!limitSwitches.isHigh())
         chassis_motor.set(speed*Constants.CHASSIS_VERTICAL_ADJUST_LIMIT);
       else
         hold_chassis();
     }
     else if (speed < 0) {
-      if (!isLow())
+      if (!limitSwitches.isLow())
         chassis_motor.set(speed*Constants.CHASSIS_VERTICAL_ADJUST_LIMIT);
       else
         hold_chassis();

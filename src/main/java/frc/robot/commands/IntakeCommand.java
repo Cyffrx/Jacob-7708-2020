@@ -70,7 +70,7 @@ public class IntakeCommand extends CommandBase {
     }
 
     // NEEDS TO HAPPEN ONLY IF THE LOW SWITCH IS ACTIVATED
-    if (mSlide.getAsBoolean() && !mIntake.isLow()) {
+    if (mSlide.getAsBoolean() && !mIntake.limitSwitches.isLow()) {
       mIntake.sliderail_toggle();
     }
   

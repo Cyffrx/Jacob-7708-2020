@@ -7,32 +7,32 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.sensors.vision_processing.ColorSensor;
 
-public class LiftSubsystem extends SubsystemBase {
+public class ColorWheelSubsystem extends SubsystemBase {
   /**
-   * Creates a new LiftSubsystem.
+   * Creates a new ColorSensor.
    */
+  
+   private TalonFX colorWheel = new TalonFX(Constants.COLOR_WHEEL);
+   
+   private DoubleSolenoid colorWheelSolenoid = new DoubleSolenoid(Constants.COLOR_WHEEL_FWD, Constants.COLOR_WHEEL_BKWD);
 
-  private static double BRAKE = 0;
+   private ColorSensor colorSensor = new ColorSensor();
 
-   private WPI_TalonSRX LiftFalcon = new WPI_TalonSRX(Constants.LIFT);
-
-   public LiftSubsystem() {
-
+   public ColorWheelSubsystem() {
   }
 
-  public void raiseRobot() {
-    LiftFalcon.set(Constants.LIFT_WINCH_SPEED);
-  }
+  public void spinColorWheel() {
+    //code
+    
 
-   public void brake() {
-    LiftFalcon.set(BRAKE); // will likely need to be replaced with a PID subsystem to keep the robot's position on the bar
-                           // also might need to remove safety feature of FMS so it does not fall from its suspension.
-   }
+  }
 
 
   @Override

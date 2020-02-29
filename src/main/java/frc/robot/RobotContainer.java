@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.autonomous.subroutines.AutonToDrive;
 import frc.robot.commands.ChassisCommand;
 import frc.robot.commands.DrivetrainCommand;
 import frc.robot.commands.IntakeCommand;
@@ -39,7 +40,7 @@ public class RobotContainer {
   // Commands
 
   // Controller
-  XboxController ControllerMaster = new XboxController(Constants.DVT_GAMEPAD);
+  XboxController ControllerDriver = new XboxController(Constants.DVT_GAMEPAD);
   XboxController ControllerShooter = new XboxController(Constants.SHT_GAMEPAD);
 
 
@@ -53,16 +54,17 @@ public class RobotContainer {
     mDrivetrain.setDefaultCommand(
       new DrivetrainCommand(
         mDrivetrain,
-        () -> ControllerMaster.getY(GenericHID.Hand.kLeft), // power
-        () -> ControllerMaster.getX(GenericHID.Hand.kRight), // rotation
-        () -> ControllerMaster.getAButtonReleased() // gearshift
+        () -> ControllerDriver.getY(GenericHID.Hand.kLeft), // power
+        () -> ControllerDriver.getX(GenericHID.Hand.kRight), // rotation
+        () -> ControllerDriver.getAButtonReleased() // gearshift
         )
     );
 
 
     mLift.setDefaultCommand(
       new LiftCommand(mLift,
-      () -> ControllerMaster.getPOV() // lift dpad
+      () -> ControllerDriver.getPOV() // lift dpad
+      // pneumatic release
       )
     );
 
@@ -79,7 +81,7 @@ public class RobotContainer {
         mIntake,
         () -> ControllerShooter.getAButtonPressed(), // hold intake
         () -> ControllerShooter.getBButtonReleased(), // toggle index
-        () -> ControllerMaster.getXButtonReleased() // slide toggle
+        () -> ControllerDriver.getXButtonReleased() // slide toggle
     )
     );
 
@@ -112,6 +114,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return new AutonToDrive(mDrivetrain);
   }
 }

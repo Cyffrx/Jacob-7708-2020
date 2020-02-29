@@ -55,14 +55,15 @@ public final class Constants {
     public static final double INDEX_SPEED = .8;
     public static final double FLYWHEEL_SPEED = .8;
     public static final double FLYWHEEL_COAST_SPEED = FLYWHEEL_SPEED / 2;
-
+    public static final double COLOR_WHEEL_SPEED = 0.08;
+    public static final double LIFT_WINCH_SPEED = .5;
 
 
     /// LIMITERS ///
 
     public static final double DRIVETRAIN_LIMIT = .5;
     public static final double FLYWHEEL_LIMIT = .5;
-    public static final double INDEXER_LIMIT = .5;
+    public static final double INDEXER_LIMIT = .5;  
     public static final double INTAKE_LIMIT = .5;
     public static final double CHASSIS_VERTICAL_ADJUST_LIMIT = .5;
     
@@ -80,8 +81,8 @@ public final class Constants {
 
     /// DIGITIAL INPUT ///
 
-    public static final int LIFT_HIGH = 0;
-    public static final int LIFT_LOW = 1;
+    public static final int LIMIT_SWITCH_HIGH = 0;
+    public static final int LIMIT_SWITCH_LOW = 1;
 
     /// Colors ///
 

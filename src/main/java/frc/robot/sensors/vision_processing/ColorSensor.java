@@ -17,14 +17,14 @@ import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.Constants;
 import frc.robot.Constants.WheelColors;
 
-public class ColorSensorSubsystem {
-    public ColorSensorSubsystem(Port konboard) {
+public class ColorSensor {
+    public ColorSensor(Port konboard) {
     }
 
     private final ColorSensorV3 colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
     private final ColorMatch colorMatcher = new ColorMatch();
 
-    public ColorSensorSubsystem() {
+    public ColorSensor() {
         colorMatcher.addColorMatch(WheelColors.BLUE);
         colorMatcher.addColorMatch(WheelColors.GREEN);
         colorMatcher.addColorMatch(WheelColors.RED);
