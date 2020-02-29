@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.util.Color;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -24,6 +25,9 @@ public final class Constants {
     public static final int DVT_GAMEPAD = 0;
     public static final int SHT_GAMEPAD = 1;
 
+
+    /// MOTOR PORTS ///
+
     public static final int DT_RIGHT_FALCON_LEADER = 0;
     public static final int DT_RIGHT_FALCON_1 = 1;
     public static final int DT_RIGHT_FALCON_2 = 2;
@@ -34,11 +38,14 @@ public final class Constants {
 
     public static final int SHOOTER_FALCON_MASTER = 12;
     public static final int SHOOTER_FALCON_SLAVE = 3;
- 
-    public static final int INTAKE = -1;
-    public static final int INDEXER = -1;
-    public static final int CHASSIS_RAISE = -1;
-    public static final int LIFT = -1;
+    public static final int INTAKE = 4;
+    public static final int INDEXER = 5;
+    public static final int CHASSIS_RAISE = 6;
+    
+    public static final int LIFT = 7;
+
+    public static final int COLOR_WHEEL = 8;
+
 
 
     /// SPEEDS ///
@@ -62,23 +69,34 @@ public final class Constants {
 
     /// PNEUMATICS ///
 
-    public static final int GEARSHIFT_FWD = -1;
-    public static final int GEARSHIFT_BKWD = -1;
+    public static final int GEARSHIFT_FWD = 0;
+    public static final int GEARSHIFT_BKWD = 1;
 
-    public static final int SLIDERAIL_FWD= -1;
-    public static final int SLIDERAIL_BKWD= -1;
+    public static final int SLIDERAIL_FWD= 2;
+    public static final int SLIDERAIL_BKWD= 3;
+
+    public static final int COLOR_WHEEL_FWD = 4;
+    public static final int COLOR_WHEEL_BKWD = 5;    
 
     /// DIGITIAL INPUT ///
 
-    public static final int LIFT_HIGH = -1;
-    public static final int LIFT_LOW = -1;
-    
+    public static final int LIFT_HIGH = 0;
+    public static final int LIFT_LOW = 1;
 
-    /// VISION STUFF ///
+    /// Colors ///
+
+    public static final class WheelColors {
+        public static final Color BLUE = new Color(0.143, 0.427, 0.429);
+        public static final Color GREEN = new Color(0.197, 0.561, 0.240);
+        public static final Color RED = new Color(0.561, 0.232, 0.114);
+        public static final Color YELLOW = new Color(0.361, 0.524, 0.113);
+    }
+
+    /// VISION ///
 
     public static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
-    public static final NetworkTableEntry tx = table.getEntry("tx");
+    // public static final NetworkTableEntry tmx = table.getEntry("tx");
     public static final NetworkTableEntry ty = table.getEntry("ty");
     public static final NetworkTableEntry ta = table.getEntry("ta");
     public static final NetworkTableEntry tv = table.getEntry("tv");
@@ -93,6 +111,5 @@ public final class Constants {
 
     public static final double visionTargetHeightLow = 0; // X feet, Y inches
     public static final double visionTargetHeightHigh = 0; // X feet, Y inches
-
 
 }

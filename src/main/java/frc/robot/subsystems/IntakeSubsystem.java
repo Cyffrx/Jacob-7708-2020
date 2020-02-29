@@ -25,8 +25,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
    private WPI_TalonFX intakeMotor = new WPI_TalonFX(Constants.INTAKE);
 
-   private DigitalInput limitSwitchLow = new DigitalInput(Constants.LIFT_LOW);
-
    DoubleSolenoid sliderail = new DoubleSolenoid(Constants.SLIDERAIL_FWD, Constants.SLIDERAIL_BKWD);
  
 
@@ -35,7 +33,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public boolean isLow() {
-    return limitSwitchLow.get();
+    //return limitSwitchLow.get();
+    return true;
   }
 
   public void sliderail_toggle() {
