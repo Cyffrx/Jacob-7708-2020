@@ -30,11 +30,13 @@ public class ChassisSubsystem extends SubsystemBase {
   }
 
   public boolean isHigh() {
-    return limitSwitchHigh.get();
+    //return limitSwitchHigh.get();
+    return true;
   }
 
   public boolean isLow() {
-    return limitSwitchLow.get();
+    //return limitSwitchLow.get();
+    return true;
   }
 
   public void delta_chassis(double speed) {
