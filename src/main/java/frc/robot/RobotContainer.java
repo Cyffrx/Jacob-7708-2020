@@ -1,11 +1,9 @@
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.autonomous.subroutines.AutonToDrive;
 import frc.robot.commands.ChassisCommand;
 import frc.robot.commands.DrivetrainCommand;
 import frc.robot.commands.IntakeCommand;
@@ -34,8 +32,8 @@ public class RobotContainer {
   private LiftSubsystem mLift = new LiftSubsystem();
   private ChassisSubsystem mChassis = new ChassisSubsystem();
   private IntakeSubsystem mIntake = new IntakeSubsystem();
-  
   private LimelightSubsystem mLimelight = new LimelightSubsystem();
+
 
   // Commands
 
@@ -48,6 +46,9 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
+    CameraServer.getInstance().startAutomaticCapture(0);
+
     // Configure the button bindings
     configureButtonBindings();
     
@@ -56,15 +57,16 @@ public class RobotContainer {
         mDrivetrain,
         () -> ControllerDriver.getY(GenericHID.Hand.kLeft), // power
         () -> ControllerDriver.getX(GenericHID.Hand.kRight), // rotation
-        () -> ControllerDriver.getAButtonReleased() // gearshift
+        () -> ControllerDriver.getAButtonReleased(), // gearshift
+        () -> ControllerDriver.getYButtonPressed() // invert drivetrain
         )
     );
 
 
     mLift.setDefaultCommand(
       new LiftCommand(mLift,
-      () -> ControllerDriver.getPOV() // lift dpad
-      // pneumatic release
+      () -> ControllerDriver.getPOV(), // lift dpad
+      () -> ControllerDriver.getBumper(GenericHID.Hand.kLeft)
       )
     );
 
@@ -79,9 +81,10 @@ public class RobotContainer {
     mIntake.setDefaultCommand(
       new IntakeCommand (
         mIntake,
-        () -> ControllerShooter.getAButtonPressed(), // hold intake
-        () -> ControllerShooter.getBButtonReleased(), // toggle index
-        () -> ControllerDriver.getXButtonReleased() // slide toggle
+        () -> ControllerShooter.getAButton(), // hold intake
+        () -> ControllerShooter.getXButton(), // hold outtake
+        () -> ControllerShooter.getYButtonPressed(), // toggle passive indexing
+        () -> ControllerDriver.getBumper(GenericHID.Hand.kRight) // slide toggle
     )
     );
 
@@ -89,8 +92,10 @@ public class RobotContainer {
     mShooter.setDefaultCommand(
       new ShootCommand (
         mShooter,
-        () -> ControllerShooter.getBButtonReleased(), // ramp flywheel
-        () -> ControllerShooter.getBumperPressed(GenericHID.Hand.kRight) // activates indexer, shooting ball
+        () -> ControllerShooter.getBumper(GenericHID.Hand.kLeft), // activates indexer, shooting ball
+        () -> ControllerShooter.getBumper(GenericHID.Hand.kRight), // activates indexer, outdexing ball
+        () -> ControllerShooter.getTriggerAxis(GenericHID.Hand.kRight), // shoot flywheel manually
+        () -> ControllerShooter.getTriggerAxis(GenericHID.Hand.kLeft) // shoot flywheel manually
       )
     );
 
@@ -114,6 +119,10 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new AutonToDrive(mDrivetrain);
+    return null;
+  }
+
+  public DrivetrainSubsystem returnDrivetrain() {
+    return mDrivetrain;
   }
 }

@@ -26,28 +26,29 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
   public ShooterSubsystem() {
-    RFalcon_Master.setInverted(false);
-    RFalcon_Slave.setInverted(true);
+    RFalcon_Master.setInverted(true);
+    RFalcon_Slave.setInverted(false);
 
     RFalcon_Slave.follow(RFalcon_Master);
    
   }
 
-  public void shoot() {
+  public void shoot_analog(double speed) {
+    RFalcon_Master.set(speed*Constants.FLYWHEEL_LIMIT);
+  }
+
+  public void index() {
     indexer.set(Constants.INDEX_SPEED*Constants.INDEXER_LIMIT);
   }
 
-  public void ramp() {
-    RFalcon_Master.set(Constants.FLYWHEEL_SPEED*Constants.FLYWHEEL_LIMIT);
+  public void flushIndex() {
+    indexer.set(-1*Constants.INDEX_SPEED*Constants.INDEXER_LIMIT);
   }
 
-  public void coast() {
-    RFalcon_Master.set(Constants.FLYWHEEL_COAST_SPEED*Constants.FLYWHEEL_LIMIT);
+  public void stopIndex() {
+    indexer.set(BRAKE);
   }
 
-  public void brake() {
-    RFalcon_Master.set(BRAKE);
-  }
 
   @Override
   public void periodic() {

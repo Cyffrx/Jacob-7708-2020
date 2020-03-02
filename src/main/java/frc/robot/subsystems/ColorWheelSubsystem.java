@@ -7,7 +7,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,7 +19,7 @@ public class ColorWheelSubsystem extends SubsystemBase {
    * Creates a new ColorSensor.
    */
   
-   private TalonFX colorWheel = new TalonFX(Constants.COLOR_WHEEL);
+   private WPI_TalonFX colorWheel = new WPI_TalonFX(Constants.COLOR_WHEEL);
    
    private DoubleSolenoid colorWheelSolenoid = new DoubleSolenoid(Constants.COLOR_WHEEL_FWD, Constants.COLOR_WHEEL_BKWD);
 
@@ -30,10 +30,14 @@ public class ColorWheelSubsystem extends SubsystemBase {
 
   public void spinColorWheel() {
     //code
-    
+    colorWheel.set(Constants.COLOR_WHEEL_SPEED);
+
 
   }
 
+  public void stopColorWheel() {
+    colorWheel.set(0);    
+  }
 
   @Override
   public void periodic() {

@@ -8,8 +8,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.sensors.vision_processing.LimitSwitchSensors;
@@ -19,7 +19,7 @@ public class ChassisSubsystem extends SubsystemBase {
    * Creates a new ChassisSubsystem
    */
 
-  private WPI_TalonSRX chassis_motor = new WPI_TalonSRX(Constants.CHASSIS_RAISE);
+  private WPI_VictorSPX chassis_motor = new WPI_VictorSPX(Constants.CHASSIS_RAISE);
   
   private LimitSwitchSensors limitSwitches = new LimitSwitchSensors();
 

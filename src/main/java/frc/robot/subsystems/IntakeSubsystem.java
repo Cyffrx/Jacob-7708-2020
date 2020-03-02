@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.sensors.vision_processing.LimitSwitchSensors;
 
 public class IntakeSubsystem extends SubsystemBase {
   /**
@@ -27,7 +26,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
    private DoubleSolenoid sliderail = new DoubleSolenoid(Constants.SLIDERAIL_FWD, Constants.SLIDERAIL_BKWD);
 
-   public LimitSwitchSensors limitSwitches = new LimitSwitchSensors();
+   ///public LimitSwitchSensors limitSwitches = new LimitSwitchSensors();
 
 
 
@@ -37,7 +36,7 @@ public class IntakeSubsystem extends SubsystemBase {
   
 
   public void sliderail_toggle() {
-    if (sliderail.get() == Value.kReverse && !limitSwitches.isLow()) {
+    if (sliderail.get() == Value.kReverse && true/*!limitSwitches.isLow()*/) {
       //needs to check if low limit switch is activated
       sliderail.set(Value.kForward);
     } else {
@@ -49,12 +48,16 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeMotor.set(Constants.INTAKE_SPEED*Constants.INTAKE_LIMIT);
   }
 
-  public void index() {
+  public void outtake() {
+    intakeMotor.set(-1 * Constants.INTAKE_SPEED*Constants.INTAKE_LIMIT);
+  }
+
+  public void passivelyIndex() {
     intakeMotor.set(Constants.INTAKE_INDEX_SPEED*Constants.INTAKE_LIMIT);
   }
 
 
-  public void setInactive() {
+  public void stop() {
     intakeMotor.set(STOP);
   }
 

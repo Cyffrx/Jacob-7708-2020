@@ -35,14 +35,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
   
   
   public DrivetrainSubsystem() {
-    gearshift.set(Value.kReverse);
+    gearshift.set(Value.kForward);
 
     RFalcon_Leader.setInverted(true);
 
     RFalcon_1.setInverted(false);
     RFalcon_2.setInverted(false);
 
-    RFalcon_1.follow(RFalcon_Leader);
+    RFalcon_1.follow(RFalcon_Leader); 
     RFalcon_2.follow(RFalcon_Leader);
 
 
@@ -52,7 +52,19 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     LFalcon_1.follow(LFalcon_Leader);
     LFalcon_2.follow(LFalcon_Leader);
+
+    /*
+    RFalcon_Leader.configSupplyCurrentLimit(null, 70);
+    RFalcon_1.configSupplyCurrentLimit(null, 70);
+    RFalcon_2.configSupplyCurrentLimit(null, 70);
+
+    LFalcon_Leader.configSupplyCurrentLimit(null, 70);
+    LFalcon_1.configSupplyCurrentLimit(null, 70);
+    LFalcon_2.configSupplyCurrentLimit(null, 70);
   
+    //need to limit all falcons to 70 amps at least
+*/
+
   }
 
   public void shift() {

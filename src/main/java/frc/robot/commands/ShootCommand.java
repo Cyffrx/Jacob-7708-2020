@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 
 import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -19,18 +20,24 @@ public class ShootCommand extends CommandBase {
    */
 
    private final ShooterSubsystem mShooter;
-   private final BooleanSupplier mRamp;
-   private final BooleanSupplier mShoot;
+   private final BooleanSupplier mIndex;
+   private final BooleanSupplier mFlushIndex;
+   private final DoubleSupplier mPositiveShooterSpeed;
+   private final DoubleSupplier mNegativeShooterSpeed;
    
   public ShootCommand(ShooterSubsystem shooter, 
-    BooleanSupplier ramp,
-    BooleanSupplier shoot
+    BooleanSupplier index,
+    BooleanSupplier flushIndex,
+    DoubleSupplier positiveShooterSpeed,
+    DoubleSupplier negativeShooterSpeed
     ) {
     
     mShooter = shooter;
-    mRamp = ramp;
-    mShoot = shoot;
-    
+    mIndex = index;
+    mFlushIndex = index;
+    mPositiveShooterSpeed = positiveShooterSpeed;
+    mNegativeShooterSpeed = negativeShooterSpeed;
+
     addRequirements(shooter);
   }
 
@@ -42,16 +49,27 @@ public class ShootCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (mRamp.getAsBoolean()) {
-      mShooter.ramp();
-    } else {
-      mShooter.coast();
+
+    if (mIndex.getAsBoolean()) {
+      mShooter.index();
+    }
+    
+    else if (mFlushIndex.getAsBoolean()) {
+      mShooter.flushIndex();
+    }
+    else {
+      mShooter.stopIndex();
     }
 
-    if (mShoot.getAsBoolean()) {
-      mShooter.shoot();
-    }
   
+    mShooter.shoot_analog(
+      (mPositiveShooterSpeed.getAsDouble() >  mNegativeShooterSpeed.getAsDouble())
+          ?
+          mPositiveShooterSpeed.getAsDouble()   
+          :
+          mNegativeShooterSpeed.getAsDouble()
+      );
+    
   }
 
   // Called once the command ends or is interrupted.

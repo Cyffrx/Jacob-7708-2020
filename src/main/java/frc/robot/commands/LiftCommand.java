@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -20,13 +21,17 @@ public class LiftCommand extends CommandBase {
 
   private final LiftSubsystem mLift;
   private final IntSupplier mPOV;
+  private final BooleanSupplier mUnlockWinch;
+
 
    public LiftCommand(LiftSubsystem Lift,
-        IntSupplier POV
+        IntSupplier POV,
+        BooleanSupplier unlockWinch
     ) {
     // Use addRequirements() here to declare subsystem dependencies.
     mLift = Lift;
     mPOV = POV;
+    mUnlockWinch = unlockWinch;
 
     addRequirements(Lift);
 
@@ -40,6 +45,10 @@ public class LiftCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (mUnlockWinch.getAsBoolean()) {
+      mLift.unlockWinch();
+    }
+
     if (mPOV.getAsInt() == 0) {
       mLift.raiseRobot();
     } else {

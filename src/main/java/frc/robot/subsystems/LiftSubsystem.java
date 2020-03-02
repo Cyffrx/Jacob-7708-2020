@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -20,9 +22,19 @@ public class LiftSubsystem extends SubsystemBase {
   private static double BRAKE = 0;
 
    private WPI_TalonSRX LiftFalcon = new WPI_TalonSRX(Constants.LIFT);
+   
+   private DoubleSolenoid Lift_Lock = new DoubleSolenoid(
+        Constants.HANG_LOCK_HOLD, 
+        Constants.HANG_LOCK_RELEASE
+        );
 
    public LiftSubsystem() {
+    Lift_Lock.set(Value.kReverse);
 
+  }
+
+  public void unlockWinch() {
+    Lift_Lock.set(Value.kForward);
   }
 
   public void raiseRobot() {

@@ -19,6 +19,9 @@ public class DrivetrainCommand extends CommandBase {
   private final DoubleSupplier mForward;
   private final DoubleSupplier mRotation;
   private final BooleanSupplier mGearshift;
+
+  private final BooleanSupplier mInvertDrivetrain;
+  private boolean mDrivetrainIsInverted = true;
   
   /**
    * Creates a new DrivetrainCommand.
@@ -27,13 +30,17 @@ public class DrivetrainCommand extends CommandBase {
       DrivetrainSubsystem drivetrain, 
       DoubleSupplier forward, 
       DoubleSupplier rotation,
-      BooleanSupplier gearShift
+      BooleanSupplier gearShift,
+      BooleanSupplier invertDrivetrain
+      
     ) {
     
     mGearshift = gearShift;
     mForward = forward;
     mRotation = rotation;
     mDrive = drivetrain;
+    mInvertDrivetrain = invertDrivetrain;
+
     addRequirements(mDrive);
   }
 
@@ -46,13 +53,24 @@ public class DrivetrainCommand extends CommandBase {
   @Override
   public void execute() {  
 
+    if (mInvertDrivetrain.getAsBoolean())
+      mDrivetrainIsInverted = !mDrivetrainIsInverted;
+
     if (mGearshift.getAsBoolean())
       mDrive.shift();
      
-    mDrive.cheezy_drive(
-      mForward.getAsDouble(),
-      mRotation.getAsDouble()
-    );
+
+    if (mDrivetrainIsInverted) {
+      mDrive.cheezy_drive(
+        mForward.getAsDouble(),
+        mRotation.getAsDouble()
+        );
+    } else {
+      mDrive.cheezy_drive(
+        mForward.getAsDouble() * -1,
+        mRotation.getAsDouble() * -1
+        );
+    }
 
   }
 

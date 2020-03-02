@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -19,10 +20,11 @@ public class IntakeCommand extends CommandBase {
 
    private final IntakeSubsystem mIntake;
    private final BooleanSupplier mIsIntaking;
-   private final BooleanSupplier mIsIndexing;
+   private final BooleanSupplier mIsOuttaking;
+   private final BooleanSupplier mIsPassivelyIndexing;
    private final BooleanSupplier mSlide;
 
-   private boolean indexing = false;
+   private boolean isPassivelyIntaking = false;
 
    /*
    hold to intake
@@ -33,16 +35,21 @@ public class IntakeCommand extends CommandBase {
    
   public IntakeCommand(IntakeSubsystem Intake,
     BooleanSupplier isIntaking,
-    BooleanSupplier isIndexing,
+    BooleanSupplier isOuttaking,
+    BooleanSupplier isPassivelyIndexing,
     BooleanSupplier Slide
   ) {
     // Use addRequirements() here to declare subsystem dependencies.
     
     mIntake = Intake;
+    
     mIsIntaking = isIntaking;
-    mIsIndexing = isIndexing;
-    mSlide = Slide;
+    mIsOuttaking = isOuttaking;
 
+    mIsPassivelyIndexing = isPassivelyIndexing;
+    
+    mSlide = Slide;
+    
     addRequirements(Intake);
   }
 
@@ -55,22 +62,25 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
 
-    if (mIsIndexing.getAsBoolean()) {
-      indexing=!indexing;
+    if (mIsPassivelyIndexing.getAsBoolean()) {
+      isPassivelyIntaking=!isPassivelyIntaking;
     }
 
-    if (indexing) {
-      mIntake.index();
-    } else {
-      mIntake.setInactive();
+    if (isPassivelyIntaking) {
+      mIntake.passivelyIndex();
     }
-    
+
     if (mIsIntaking.getAsBoolean()) {
       mIntake.intake();
     }
+    else if (mIsOuttaking.getAsBoolean()) {
+      mIntake.outtake();
+    } else {
+      mIntake.stop();
+    }
 
-    // NEEDS TO HAPPEN ONLY IF THE LOW SWITCH IS ACTIVATED
-    if (mSlide.getAsBoolean() && !mIntake.limitSwitches.isLow()) {
+    // NEEDS TO HAPPEN \ONLY IF THE LOW SWITCH IS ACTIVATED
+    if (mSlide.getAsBoolean() && true/*!mIntake.limitSwitches.isLow()*/) {
       mIntake.sliderail_toggle();
     }
   

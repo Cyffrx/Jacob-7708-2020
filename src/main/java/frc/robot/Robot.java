@@ -7,9 +7,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
 
 /**
@@ -66,8 +69,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    
+    Constants.MATCH_TIME = Timer.getFPGATimestamp();
+    
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -79,6 +84,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    double current_time = Timer.getFPGATimestamp();
+    
+    while (current_time - Constants.MATCH_TIME < 1.5) {
+
+      m_robotContainer.returnDrivetrain().cheezy_drive(.5, 0);
+      current_time = Timer.getFPGATimestamp();
+    }
+    
+
   }
 
   @Override

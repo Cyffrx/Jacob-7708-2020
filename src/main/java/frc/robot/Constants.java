@@ -25,32 +25,49 @@ public final class Constants {
     public static final int DVT_GAMEPAD = 0;
     public static final int SHT_GAMEPAD = 1;
 
-
     /// MOTOR PORTS ///
 
-    public static final int DT_RIGHT_FALCON_LEADER = 0;
-    public static final int DT_RIGHT_FALCON_1 = 1;
-    public static final int DT_RIGHT_FALCON_2 = 2;
+    public static final int DT_RIGHT_FALCON_LEADER = 1;
+    public static final int DT_RIGHT_FALCON_1 = 2;
+    public static final int DT_RIGHT_FALCON_2 = 3;
 
-    public static final int DT_LEFT_FALCON_LEADER = 13;
-    public static final int DT_LEFT_FALCON_1 = 14;
-    public static final int DT_LEFT_FALCON_2 = 15;
+    public static final int DT_LEFT_FALCON_LEADER = 4;
+    public static final int DT_LEFT_FALCON_1 = 5;
+    public static final int DT_LEFT_FALCON_2 = 6;
 
-    public static final int SHOOTER_FALCON_MASTER = 12;
-    public static final int SHOOTER_FALCON_SLAVE = 3;
-    public static final int INTAKE = 4;
-    public static final int INDEXER = 5;
-    public static final int CHASSIS_RAISE = 6;
+    public static final int SHOOTER_FALCON_MASTER = 10;
+    public static final int SHOOTER_FALCON_SLAVE = 11;
+    public static final int INTAKE = 8;
+    public static final int INDEXER = 9;
+    public static final int CHASSIS_RAISE = 7;
     
-    public static final int LIFT = 7;
+    public static final int LIFT = 13;
 
-    public static final int COLOR_WHEEL = 8;
+    public static final int COLOR_WHEEL = 12;    
 
+    /// PNEUMATICS ///
+
+    public static final int GEARSHIFT_FWD = 1;
+    public static final int GEARSHIFT_BKWD = 2;
+
+    public static final int SLIDERAIL_FWD= 0;
+    public static final int SLIDERAIL_BKWD= 7;
+
+    public static final int COLOR_WHEEL_FWD = 6;
+    public static final int COLOR_WHEEL_BKWD = 5;    
+
+    public static final int HANG_LOCK_HOLD = 4;
+    public static final int HANG_LOCK_RELEASE = 3;
+
+    /// DIGITIAL INPUT ///
+
+    public static final int LIMIT_SWITCH_HIGH = 0;
+    public static final int LIMIT_SWITCH_LOW = 1;
 
 
     /// SPEEDS ///
 
-    public static final double INTAKE_SPEED = .8;
+    public static final double INTAKE_SPEED = .7;
     public static final double INTAKE_INDEX_SPEED = .25;
     public static final double INDEX_SPEED = .8;
     public static final double FLYWHEEL_SPEED = .8;
@@ -61,28 +78,11 @@ public final class Constants {
 
     /// LIMITERS ///
 
-    public static final double DRIVETRAIN_LIMIT = .5;
+    public static final double DRIVETRAIN_LIMIT = .45;
     public static final double FLYWHEEL_LIMIT = .5;
     public static final double INDEXER_LIMIT = .5;  
-    public static final double INTAKE_LIMIT = .5;
-    public static final double CHASSIS_VERTICAL_ADJUST_LIMIT = .5;
-    
-
-    /// PNEUMATICS ///
-
-    public static final int GEARSHIFT_FWD = 0;
-    public static final int GEARSHIFT_BKWD = 1;
-
-    public static final int SLIDERAIL_FWD= 2;
-    public static final int SLIDERAIL_BKWD= 3;
-
-    public static final int COLOR_WHEEL_FWD = 4;
-    public static final int COLOR_WHEEL_BKWD = 5;    
-
-    /// DIGITIAL INPUT ///
-
-    public static final int LIMIT_SWITCH_HIGH = 0;
-    public static final int LIMIT_SWITCH_LOW = 1;
+    public static final double INTAKE_LIMIT = 1;
+    public static final double CHASSIS_VERTICAL_ADJUST_LIMIT = -.5;
 
     /// Colors ///
 
@@ -92,6 +92,10 @@ public final class Constants {
         public static final Color RED = new Color(0.561, 0.232, 0.114);
         public static final Color YELLOW = new Color(0.361, 0.524, 0.113);
     }
+
+    /// time ////
+    
+    public static double MATCH_TIME = 0;
 
     /// VISION ///
 

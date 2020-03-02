@@ -24,11 +24,13 @@ public class LimitSwitchSensors extends SubsystemBase {
   }
 
   public boolean isHigh() {
-    return limitSwitchHigh.get();
+    //return limitSwitchHigh.get();
+    return false;
   }
 
   public boolean isLow() {
-    return limitSwitchLow.get();
+    //return limitSwitchLow.get();
+    return false;
   }
 
   @Override
