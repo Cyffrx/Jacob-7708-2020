@@ -10,8 +10,10 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LiftSubsystem;
+import frc.robot.subsystems.ScoopSubsystem;
 
 
 public class LiftCommand extends CommandBase {
@@ -20,16 +22,19 @@ public class LiftCommand extends CommandBase {
    */
 
   private final LiftSubsystem mLift;
+  private final ScoopSubsystem mScoop;
   private final IntSupplier mPOV;
   private final BooleanSupplier mUnlockWinch;
 
 
    public LiftCommand(LiftSubsystem Lift,
+        ScoopSubsystem scoop,
         IntSupplier POV,
         BooleanSupplier unlockWinch
     ) {
     // Use addRequirements() here to declare subsystem dependencies.
     mLift = Lift;
+    mScoop = scoop;
     mPOV = POV;
     mUnlockWinch = unlockWinch;
 
@@ -45,15 +50,14 @@ public class LiftCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (mUnlockWinch.getAsBoolean()) {
+    if (mUnlockWinch.getAsBoolean() && mScoop.getScoopStatus() == Value.kForward)
       mLift.unlockWinch();
-    }
 
-    if (mPOV.getAsInt() == 0) {
+    if (mPOV.getAsInt() == 0)
       mLift.raiseRobot();
-    } else {
+    else
       mLift.brake();
-    }
+    
   }
 
   // Called once the command ends or is interrupted.

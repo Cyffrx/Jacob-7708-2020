@@ -14,38 +14,44 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.sensors.vision_processing.ColorSensor;
 
-public class ColorWheelSubsystem extends SubsystemBase {
+public class ScoopSubsystem extends SubsystemBase {
   /**
-   * Creates a new ColorSensor.
+   * Creates a new CellScoppSubsystem.
    */
-  
-   private WPI_TalonFX colorWheel = new WPI_TalonFX(Constants.COLOR_WHEEL);
-   
-   private DoubleSolenoid colorWheelSolenoid = new DoubleSolenoid(Constants.COLOR_WHEEL_FWD, Constants.COLOR_WHEEL_BKWD);
 
-   private ColorSensor colorSensor = new ColorSensor();
+   private WPI_TalonFX scoop = new WPI_TalonFX(Constants.CELL_SCOOP);
 
-   public ColorWheelSubsystem() {
-    colorWheel.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 65, 0.25));
-    colorWheelSolenoid.set(Value.kReverse);
+   public DoubleSolenoid deployScoop = new DoubleSolenoid(Constants.DEPLOY_SCOOP, Constants.RETRACT_SCOOP);
+
+  public ScoopSubsystem() {
+    deployScoop.set(Value.kReverse);
+    scoop.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 65, 0.25));
+
   }
 
-  public void deployColorWheel() {
-    if (colorWheelSolenoid.get() == Value.kForward)
-      colorWheelSolenoid.set(Value.kReverse);
+  public void toggleDeploy() {
+    if (deployScoop.get() == Value.kReverse)
+      deployScoop.set(Value.kForward);
     else
-      colorWheelSolenoid.set(Value.kForward);
+      deployScoop.set(Value.kReverse);
+    
   }
 
-  public void spinColorWheel() {
-    //code
-    colorWheel.set(Constants.COLOR_WHEEL_SPEED);
+  public void intake() {
+    scoop.set(Constants.SCOOP_SPEED);
   }
 
-  public void stopColorWheel() {
-    colorWheel.set(0);    
+  public void outtake() {
+    scoop.set(-1*Constants.SCOOP_SPEED);
+  }
+
+  public void stopMotor() {
+    scoop.set(0);
+  }
+
+  public Value getScoopStatus() {
+    return deployScoop.get();
   }
 
   @Override

@@ -7,45 +7,55 @@
 
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
+import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ChassisSubsystem;
+import frc.robot.subsystems.ScoopSubsystem;
 
-public class ChassisCommand extends CommandBase {
+public class ScoopCommand extends CommandBase {
   /**
-   * Creates a new ChassisCommand.
+   * Creates a new scoop.
    */
 
-   private final ChassisSubsystem mChassis;
-   private final DoubleSupplier mChangeChassis;
-
-
-
-   public ChassisCommand(ChassisSubsystem Chassis, 
-      DoubleSupplier ChangeChassis
-      
-  ) {
+   private final ScoopSubsystem mScoop;
+   private final BooleanSupplier mToggleDeploy;
+   private final BooleanSupplier mIsIntaking;
+   private BooleanSupplier mIsOuttaking;
+   
+  public ScoopCommand(ScoopSubsystem scoop,
+          BooleanSupplier toggleDeploy,
+          BooleanSupplier isIntaking,
+          BooleanSupplier isOuttaking
+          ) {
     // Use addRequirements() here to declare subsystem dependencies.
-    mChangeChassis = ChangeChassis;
 
-    mChassis = Chassis;
+    mScoop = scoop;
+    mToggleDeploy = toggleDeploy;
+    mIsIntaking = isIntaking;
+    mIsOuttaking = isOuttaking;
 
-    addRequirements(Chassis);
-    
+    addRequirements(scoop);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    mChassis.delta_chassis(mChangeChassis.getAsDouble());
+    if (mIsIntaking.getAsBoolean())
+      mScoop.intake();
+    else if (mIsOuttaking.getAsBoolean())
+      mScoop.outtake();
+    else
+      mScoop.stopMotor();
+
+    if (mToggleDeploy.getAsBoolean())
+      mScoop.toggleDeploy();
     
+
   }
 
   // Called once the command ends or is interrupted.

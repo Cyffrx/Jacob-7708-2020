@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -53,17 +54,23 @@ public class DrivetrainSubsystem extends SubsystemBase {
     LFalcon_1.follow(LFalcon_Leader);
     LFalcon_2.follow(LFalcon_Leader);
 
-    /*
-    RFalcon_Leader.configSupplyCurrentLimit(null, 70);
-    RFalcon_1.configSupplyCurrentLimit(null, 70);
-    RFalcon_2.configSupplyCurrentLimit(null, 70);
+    
+/**
+  * Configure the current limits that will be used
+  * Stator Current is the current that passes through the motor stators.
+  *  Use stator current limits to limit rotor acceleration/heat production
+  * Supply Current is the current that passes into the controller from the supply
+  *  Use supply current limits to prevent breakers from tripping
+  *
+  *                                                               enabled | Limit(amp) | Trigger Threshold(amp) | Trigger Threshold Time(s)  */
 
-    LFalcon_Leader.configSupplyCurrentLimit(null, 70);
-    LFalcon_1.configSupplyCurrentLimit(null, 70);
-    LFalcon_2.configSupplyCurrentLimit(null, 70);
-  
-    //need to limit all falcons to 70 amps at least
-*/
+    RFalcon_Leader.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 65, 0.25));
+    RFalcon_1.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 65, 0.25));
+    RFalcon_2.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 65, 0.25));
+
+    LFalcon_Leader.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 65, 0.25));
+    LFalcon_1.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 65, 0.25));
+    LFalcon_2.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 65, 0.25));
 
   }
 
