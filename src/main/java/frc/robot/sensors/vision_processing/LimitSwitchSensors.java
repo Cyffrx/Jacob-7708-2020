@@ -7,17 +7,12 @@
 
 package frc.robot.sensors.vision_processing;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
 public class LimitSwitchSensors extends SubsystemBase {
   /**
    * Creates a new LimitSwitchSensors.
    */
-
-  private DigitalInput limitSwitchHigh = new DigitalInput(Constants.LIMIT_SWITCH_HIGH);
-  private DigitalInput limitSwitchLow = new DigitalInput(Constants.LIMIT_SWITCH_LOW);
 
   public LimitSwitchSensors() {
 

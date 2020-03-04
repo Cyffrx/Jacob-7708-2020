@@ -9,7 +9,6 @@ import frc.robot.commands.DrivetrainCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.LiftCommand;
 import frc.robot.commands.ShootCommand;
-import frc.robot.sensors.vision_processing.LimelightSubsystem;
 import frc.robot.subsystems.ChassisSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -32,7 +31,6 @@ public class RobotContainer {
   private LiftSubsystem mLift = new LiftSubsystem();
   private ChassisSubsystem mChassis = new ChassisSubsystem();
   private IntakeSubsystem mIntake = new IntakeSubsystem();
-  private LimelightSubsystem mLimelight = new LimelightSubsystem();
 
 
   // Commands
