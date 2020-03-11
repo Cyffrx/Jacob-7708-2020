@@ -22,19 +22,21 @@ public class ScoopSubsystem extends SubsystemBase {
 
    private WPI_TalonFX scoop = new WPI_TalonFX(Constants.CELL_SCOOP);
 
-   public DoubleSolenoid deployScoop = new DoubleSolenoid(Constants.DEPLOY_SCOOP, Constants.RETRACT_SCOOP);
+   //public DoubleSolenoid deployScoop = new DoubleSolenoid(Constants.DEPLOY_SCOOP, Constants.RETRACT_SCOOP);
 
   public ScoopSubsystem() {
-    deployScoop.set(Value.kReverse);
+    //deployScoop.set(Value.kReverse);
     scoop.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 65, 0.25));
 
   }
 
   public void toggleDeploy() {
+    /*
     if (deployScoop.get() == Value.kReverse)
       deployScoop.set(Value.kForward);
     else
       deployScoop.set(Value.kReverse);
+      */
     
   }
 
@@ -50,9 +52,11 @@ public class ScoopSubsystem extends SubsystemBase {
     scoop.set(0);
   }
 
+  /*
   public Value getScoopStatus() {
     return deployScoop.get();
   }
+*/
 
   @Override
   public void periodic() {

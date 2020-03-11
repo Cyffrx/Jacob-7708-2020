@@ -8,38 +8,32 @@
 package frc.robot.commands;
 
 import java.util.function.BooleanSupplier;
-import java.util.function.IntSupplier;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LiftSubsystem;
-import frc.robot.subsystems.ScoopSubsystem;
+import frc.robot.subsystems.ColorWheelSubsystem;
 
-
-public class LiftCommand extends CommandBase {
+public class OldColorWheelCommand extends CommandBase {
   /**
-   * Creates a new LiftCommand.
+   * Creates a new ColorWheelCommand.
    */
 
-  private final LiftSubsystem mLift;
-//  private final ScoopSubsystem mScoop;
-  private final IntSupplier mPOV;
-  private final BooleanSupplier mUnlockWinch;
+   private final ColorWheelSubsystem mColorWheel;
+   private final BooleanSupplier mSpinColorWheelStage2;
+   private final BooleanSupplier mSpinColorWheelStage3;
+   private final BooleanSupplier mDeployColorWheel;
 
-
-   public LiftCommand(LiftSubsystem Lift,
-        ScoopSubsystem scoop,
-        IntSupplier POV,
-        BooleanSupplier unlockWinch
-    ) {
+  public OldColorWheelCommand(ColorWheelSubsystem colorWheel,
+          BooleanSupplier spinColorWheelStage2,
+          BooleanSupplier spinColorWheelStage3,
+          BooleanSupplier deployColorWheel
+          ) {
     // Use addRequirements() here to declare subsystem dependencies.
-    mLift = Lift;
-//    mScoop = scoop;
-    mPOV = POV;
-    mUnlockWinch = unlockWinch;
+    mColorWheel = colorWheel;
+    mSpinColorWheelStage2 = spinColorWheelStage2;
+    mSpinColorWheelStage3 = spinColorWheelStage3;
+    mDeployColorWheel = deployColorWheel;
 
-    addRequirements(Lift);
-
+    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
@@ -49,15 +43,8 @@ public class LiftCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
+  
   public void execute() {
-    if (mUnlockWinch.getAsBoolean()/* && mScoop.getScoopStatus() == Value.kForward*/)
- //     mLift.unlockWinch();
-
-    if (mPOV.getAsInt() == 0)
-      mLift.raiseRobot();
-    else
-      mLift.brake();
-    
   }
 
   // Called once the command ends or is interrupted.

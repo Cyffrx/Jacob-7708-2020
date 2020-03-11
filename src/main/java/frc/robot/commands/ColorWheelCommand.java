@@ -18,22 +18,21 @@ public class ColorWheelCommand extends CommandBase {
    */
 
    private final ColorWheelSubsystem mColorWheel;
-   private final BooleanSupplier mSpinColorWheelStage2;
-   private final BooleanSupplier mSpinColorWheelStage3;
-   private final BooleanSupplier mDeployColorWheel;
+   private final BooleanSupplier mSpinWheelThreeTimes;
+   private final BooleanSupplier mSpinWheelToColor;
 
-  public ColorWheelCommand(ColorWheelSubsystem colorWheel,
-          BooleanSupplier spinColorWheelStage2,
-          BooleanSupplier spinColorWheelStage3,
-          BooleanSupplier deployColorWheel
-          ) {
+
+  public ColorWheelCommand(ColorWheelSubsystem subsystem,
+    BooleanSupplier SpinWheelThreeTimes,
+    BooleanSupplier SpinWheelToColor
+    ) {
+    mColorWheel = subsystem;
+    mSpinWheelThreeTimes = SpinWheelThreeTimes;
+    mSpinWheelToColor = SpinWheelToColor;
+
+    addRequirements(mColorWheel);
+      
     // Use addRequirements() here to declare subsystem dependencies.
-    mColorWheel = colorWheel;
-    mSpinColorWheelStage2 = spinColorWheelStage2;
-    mSpinColorWheelStage3 = spinColorWheelStage3;
-    mDeployColorWheel = deployColorWheel;
-
-    addRequirements(colorWheel);
   }
 
   // Called when the command is initially scheduled.
@@ -44,14 +43,12 @@ public class ColorWheelCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (mDeployColorWheel.getAsBoolean())
-      mColorWheel.deployColorWheel();
-    
-    if (mSpinColorWheelStage2.getAsBoolean())
-      mColorWheel.spinColorWheel();
-    else if (mSpinColorWheelStage3.getAsBoolean())
-      mColorWheel.spinColorWheel();
-    
+    if (mSpinWheelThreeTimes.getAsBoolean()) {
+      mColorWheel.matchColor();
+    } else if (mSpinWheelToColor.getAsBoolean()) {
+      //color wheel spin to color
+    }
+
   }
 
   // Called once the command ends or is interrupted.

@@ -7,9 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.util.Color;
 
 /**
@@ -31,8 +28,8 @@ public final class Constants {
     public static final int DT_RIGHT_FALCON_1 = 2;
     public static final int DT_RIGHT_FALCON_2 = 3;
 
-    public static final int DT_LEFT_FALCON_LEADER = 4;
-    public static final int DT_LEFT_FALCON_1 = 5;
+    public static final int DT_LEFT_FALCON_LEADER = 5;
+    public static final int DT_LEFT_FALCON_1 = 4;
     public static final int DT_LEFT_FALCON_2 = 6;
 
     public static final int CELL_SCOOP = 7;
@@ -59,7 +56,7 @@ public final class Constants {
     public static final int LIMIT_SWITCH_HIGH = 0;
     public static final int LIMIT_SWITCH_LOW = 1;
 
-    public static final int colorSensor = 0;
+  
 
     /// SPEEDS ///
 
@@ -70,16 +67,8 @@ public final class Constants {
 
     /// LIMITERS ///
 
-    public static final double DRIVETRAIN_LIMIT = .45;
-
-    /// Colors ///
-
-    public static final class WheelColors {
-        public static final Color BLUE = new Color(0.143, 0.427, 0.429);
-        public static final Color GREEN = new Color(0.197, 0.561, 0.240);
-        public static final Color RED = new Color(0.561, 0.232, 0.114);
-        public static final Color YELLOW = new Color(0.361, 0.524, 0.113);
-    }
+    public static final double DRIVETRAIN_LIMIT = 1;
+    public static final double DRIVETRAIN_TURN_LIMIT = .5;
 
     /// time ////
     
@@ -87,9 +76,10 @@ public final class Constants {
 
     /// VISION ///
 
-    public static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    /*public static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
     // public static final NetworkTableEntry tmx = table.getEntry("tx");
+    
     public static final NetworkTableEntry ty = table.getEntry("ty");
     public static final NetworkTableEntry ta = table.getEntry("ta");
     public static final NetworkTableEntry tv = table.getEntry("tv");
@@ -104,5 +94,5 @@ public final class Constants {
 
     public static final double visionTargetHeightLow = 0; // X feet, Y inches
     public static final double visionTargetHeightHigh = 0; // X feet, Y inches
-
+*/
 }

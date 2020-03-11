@@ -23,10 +23,11 @@ public class LiftSubsystem extends SubsystemBase {
 
    private WPI_TalonSRX LiftFalcon = new WPI_TalonSRX(Constants.LIFT);
    
-   private DoubleSolenoid Lift_Lock = new DoubleSolenoid(
+   /*private DoubleSolenoid Lift_Lock = new DoubleSolenoid(
         Constants.HANG_LOCK_HOLD, 
         Constants.HANG_LOCK_RELEASE
         );
+
 
    public LiftSubsystem() {
     Lift_Lock.set(Value.kReverse);
@@ -36,7 +37,7 @@ public class LiftSubsystem extends SubsystemBase {
   public void unlockWinch() {
     Lift_Lock.set(Value.kForward);
   }
-
+*/
   public void raiseRobot() {
     LiftFalcon.set(Constants.LIFT_WINCH_SPEED);
   }
