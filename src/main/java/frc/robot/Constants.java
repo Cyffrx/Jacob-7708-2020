@@ -61,7 +61,7 @@ public final class Constants {
     /// SPEEDS ///
 
     public static final double SCOOP_SPEED = .7;
-    public static final double COLOR_WHEEL_SPEED = 0.08;
+    public static final double COLOR_WHEEL_SPEED = 0.0685;
     public static final double LIFT_WINCH_SPEED = .5;
 
 
@@ -73,10 +73,12 @@ public final class Constants {
     /// time ////
     
     public static double MATCH_TIME = 0;
+    public static int SPIN_TIME = 4; //seconds
 
     /// VISION ///
 
-    /*public static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    /*
+    public static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
     // public static final NetworkTableEntry tmx = table.getEntry("tx");
     

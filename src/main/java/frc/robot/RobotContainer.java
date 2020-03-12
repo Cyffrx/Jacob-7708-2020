@@ -9,6 +9,7 @@ import frc.robot.commands.LiftCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.ScoopSubsystem;
+import frc.robot.subsystems.ColorWheelSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a

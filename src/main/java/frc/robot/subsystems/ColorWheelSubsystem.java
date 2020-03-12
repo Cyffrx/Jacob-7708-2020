@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ColorWheelSubsystem extends SubsystemBase {
 //sensors & sensor-sensors
@@ -28,6 +29,7 @@ public class ColorWheelSubsystem extends SubsystemBase {
 
 //vars
   private Color detectedColor;
+  private Color targetColor;
   private int colorCount;
   private String colorStr;
   private String desiredColor;
@@ -74,21 +76,26 @@ public class ColorWheelSubsystem extends SubsystemBase {
 
     if(neededColor == "B"){
       desiredColor = "Red";
+      targetColor = kRed;
     } else if(neededColor == "R"){
       desiredColor = "Blue";
+      targetColor = kBlue;
     } else if(neededColor == "Y"){
       desiredColor = "Green";
+      targetColor = kGreen;
     } else if(neededColor == "G") {
       desiredColor = "Yellow";
+      targetColor = kYellow;
     }
 
     SmartDashboard.putString("Detected Color", colorStr);
     SmartDashboard.putNumber("Confidence", currentColor.confidence);
   }
 
+
   //Spins the wheel for 3 rotations and matches color
   //We see the color once, two colors per rotation, land on it at 7
-
+  //dont need this function anymore
   public synchronized void matchColor(){
     if(colorStr == desiredColor){
       colorCount += 1;
@@ -103,4 +110,22 @@ public class ColorWheelSubsystem extends SubsystemBase {
 
     System.out.println(desiredColor);
   } 
+
+  public void spinForRotations (){
+    double current_time = Timer.getFPGATimestamp();
+
+      while (current_time-Constants.MATCH_TIME < 4 ){
+      colorWheel.set(Constants.COLOR_WHEEL);
+      current_time = Timer.getFPGATimestamp();
+     }
+  }
+//color wheel neeeds to spin counterclockwise
+  public void spinToColor (){
+    detectedColor = colorSensor.getColor();
+    
+     while (detectedColor != targetColor){
+      colorWheel.set(Constants.COLOR_WHEEL);
+      detectedColor = colorSensor.getColor();
+     }
+  }
 }

@@ -44,9 +44,9 @@ public class ColorWheelCommand extends CommandBase {
   @Override
   public void execute() {
     if (mSpinWheelThreeTimes.getAsBoolean()) {
-      mColorWheel.matchColor();
+      mColorWheel.spinForRotations();
     } else if (mSpinWheelToColor.getAsBoolean()) {
-      //color wheel spin to color
+      mColorWheel.spinToColor();
     }
 
   }
