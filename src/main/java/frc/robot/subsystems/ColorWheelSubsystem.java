@@ -21,11 +21,12 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Timer;
 
 public class ColorWheelSubsystem extends SubsystemBase {
+  
 //sensors & sensor-sensors
-  private final ColorSensorV3 colorSensor = new ColorSensorV3(I2C.Port.kOnboard);;
+  private final ColorSensorV3 colorSensor = new ColorSensorV3(I2C.Port.kOnboard);
   private final ColorMatch colorMatch = new ColorMatch();
 //motor
-  private final WPI_TalonFX colorWheel = new WPI_TalonFX(Constants.COLOR_WHEEL);;
+  private final WPI_TalonFX colorWheel = new WPI_TalonFX(Constants.COLOR_WHEEL);
 
 //vars
   private Color detectedColor;

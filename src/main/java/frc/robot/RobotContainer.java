@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DrivetrainCommand;
 import frc.robot.commands.LiftCommand;
+import frc.robot.commands.ColorWheelCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.LiftSubsystem;
 import frc.robot.subsystems.ScoopSubsystem;
@@ -25,6 +26,7 @@ public class RobotContainer {
   private DrivetrainSubsystem mDrivetrain = new DrivetrainSubsystem();
   private LiftSubsystem mLift = new LiftSubsystem();
   private ScoopSubsystem mScoop = new ScoopSubsystem();
+  private ColorWheelSubsystem mColorWheel = new ColorWheelSubsystem();
 
 
   // Controller
@@ -53,8 +55,16 @@ public class RobotContainer {
 
     mLift.setDefaultCommand(
       new LiftCommand(mLift, mScoop,
-      () -> ControllerDriver.getPOV(), // lift dpad
-      () -> ControllerDriver.getBumper(GenericHID.Hand.kLeft)
+      () -> ControllerShooter.getPOV(), // lift dpad
+      () -> ControllerShooter.getBumper(GenericHID.Hand.kLeft)
+      )
+    );
+
+
+    mColorWheel.setDefaultCommand( 
+      new ColorWheelCommand(mColorWheel, 
+      () -> ControllerShooter.getAButtonPressed(), // stage 2
+      () -> ControllerShooter.getYButtonPressed() //stage 3 
       )
     );
 
